@@ -29,6 +29,9 @@ class BotController extends Controller
 
         $text = new Text($senderId);
         $callSendApi = new CallSendApi(config('botfb.pageAccessToken'));
+        
+        $image = new \CodeBot\Message\Image($senderId);
+        $callSendApi->make($image->message("https://www.aprenderexcel.com.br//imagens/post/385/2901-1.jpg"));
 
         $callSendApi->make($text->message('Oii, eu sou um bot...'));
         $callSendApi->make($text->message('Você digitou: ' . $message));
