@@ -9,7 +9,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
-        "schenato/facebook-bot-sdk": "dev-master"
+        "schenato/facebook-bot-sdk": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
