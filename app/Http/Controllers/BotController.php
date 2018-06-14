@@ -7,7 +7,6 @@ use CodeBot\Message\Text;
 use CodeBot\SenderRequest;
 use CodeBot\WebHook;
 use Illuminate\Http\Request;
-use function abort;
 
 class BotController extends Controller
 {
@@ -25,11 +24,11 @@ class BotController extends Controller
     public function receiveMessage(Request $request)
     {
         $sender = new SenderRequest;
-        $senderid = $sender->getSenderId();
+        $senderId = $sender->getSenderId();
         $message = $sender->getMessage();
 
-        $text = new Text($senderid);
-        $callSendApi = new CallSendApi(config('botfb.pageAcessToken'));
+        $text = new Text($senderId);
+        $callSendApi = new CallSendApi(config('botfb.pageAccessToken'));
 
         $callSendApi->make($text->message('Oii, eu sou um bot...'));
         $callSendApi->make($text->message('Você digitou: ' . $message));

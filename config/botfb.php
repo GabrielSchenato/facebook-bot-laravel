@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'pageAcessToken' => env('FB_PAGE_ACESS_TOKEN'),
+    'pageAccessToken' => env('FB_PAGE_ACCESS_TOKEN'),
     'validationToken' => env('FB_VALIDATION_TOKEN'),
 ];
