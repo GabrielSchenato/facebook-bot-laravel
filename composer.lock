@@ -1503,12 +1503,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schenato/facebook-bot-sdk.git",
-                "reference": "51bb8e70cc6922196e6cf53cb31ce0e7d10c8620"
+                "reference": "dd0a6c997c3aa851999cfc8102f7cc86c6ec78a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schenato/facebook-bot-sdk/zipball/51bb8e70cc6922196e6cf53cb31ce0e7d10c8620",
-                "reference": "51bb8e70cc6922196e6cf53cb31ce0e7d10c8620",
+                "url": "https://api.github.com/repos/schenato/facebook-bot-sdk/zipball/dd0a6c997c3aa851999cfc8102f7cc86c6ec78a1",
+                "reference": "dd0a6c997c3aa851999cfc8102f7cc86c6ec78a1",
                 "shasum": ""
             },
             "require": {
@@ -1531,7 +1531,7 @@
                     "email": "gabriel.schenato@inovadora.com.br"
                 }
             ],
-            "time": "2018-06-14T14:48:57+00:00"
+            "time": "2018-06-14T16:44:55+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
