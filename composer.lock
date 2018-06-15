@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b28610b6c6d1e597de375655f922e7e3",
+    "content-hash": "0b997fe7ca03cf7cba64d00b44a548e1",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1499,16 +1499,16 @@
         },
         {
             "name": "schenato/facebook-bot-sdk",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schenato/facebook-bot-sdk.git",
-                "reference": "9db81641269e9ac6d9cae08faabbe71e47d7dc62"
+                "reference": "ebb58d6698a23560925d1aac855c7c027e609688"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schenato/facebook-bot-sdk/zipball/9db81641269e9ac6d9cae08faabbe71e47d7dc62",
-                "reference": "9db81641269e9ac6d9cae08faabbe71e47d7dc62",
+                "url": "https://api.github.com/repos/schenato/facebook-bot-sdk/zipball/ebb58d6698a23560925d1aac855c7c027e609688",
+                "reference": "ebb58d6698a23560925d1aac855c7c027e609688",
                 "shasum": ""
             },
             "require": {
@@ -1531,7 +1531,7 @@
                     "email": "gabriel.schenato@inovadora.com.br"
                 }
             ],
-            "time": "2018-06-14T20:45:12+00:00"
+            "time": "2018-06-15T14:24:32+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
