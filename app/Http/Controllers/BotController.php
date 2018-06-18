@@ -33,7 +33,7 @@ class BotController extends Controller
         
         $bot = Solid::factory();
         Solid::setPageAccessToken(config('botfb.pageAccessToken'));
-        Solid::setSender($senderId);
+        Solid::setSenderId($senderId);
         
         if($postback){
             if(is_array($postback))
