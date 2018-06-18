@@ -34,45 +34,45 @@ class BotController extends Controller
         $sender = new SenderRequest();
         $senderId = $sender->getSenderId();
         $message = $sender->getMessage();
+        $postback = $sender->getPostBack();
+        
+        $bot = Solid::factory();
+        Solid::setPageAccessToken(config('botfb.pageAccessToken'));
+        Solid::setSender($senderId);
+        
+        if($postback){
+            if(is_array($postback))
+            {
+                $postback = json_encode($postback);
+            }
+            $bot->message('text', 'Você chamou o postback'. $postback);
+            return '';
+        }
+        
+        $bot->message('text', 'Oii, eu sou um bot...');
+        $bot->message('text', 'Você digitou: ' . $message);
+        
+        $bot->message('image', "https://www.aprenderexcel.com.br//imagens/post/385/2901-1.jpg");
 
-        $text = new Text($senderId);
-        $callSendApi = new CallSendApi(config('botfb.pageAccessToken'));
         
-        $callSendApi->make($text->message('Oii, eu sou um bot...'));
-        $callSendApi->make($text->message('Você digitou: ' . $message));
+        $buttons = [
+            new Button('web_url', 'Google', 'https://www.google.com'),
+            new Button('web_url', 'Code.Education', 'https://code.education')
+        ];
+        $bot->template('buttons', 'Que tal testarmos a abertura de um site?', $buttons);
         
-        $image = new Image($senderId);
-        $callSendApi->make($image->message("https://www.aprenderexcel.com.br//imagens/post/385/2901-1.jpg"));
-
+        $products = [
+            new Product(
+                    'Produto 1', 'http://www.contabilidadetoledo.com.br/wp-content/uploads/2017/11/20171123.jpg', 'Curso de angular', new Button('web_url', null, 'https://angular.io')
+            ),
+            new Product(
+                    'Produto 2', 'https://mestredoadwords.com.br/wp-content/uploads/2016/12/vender-produtos.png', 'Curso de php', new Button('web_url', null, 'http://php.net')
+            ),
+        ];
         
-        $buttons = new ButtonsTemplate($senderId);
-        $buttons->add(new Button('web_url', 'Google', 'https://www.google.com'));
-        $buttons->add(new Button('web_url', 'Code.Education', 'https://code.education'));   
-        $callSendApi->make($buttons->message('Que tal testarmos a abertura de um site?'));
+        $bot->template('generic', '', $products);
         
-        $button = new Button('web_url', null, 'https://angular.io');
-        $product = new Product('Produto 1', 'http://www.contabilidadetoledo.com.br/wp-content/uploads/2017/11/20171123.jpg', 'Curso de angular', $button);
-        
-        $button = new Button('web_url', null, 'http://php.net');
-        $product2 = new Product('Produto 2', 'https://mestredoadwords.com.br/wp-content/uploads/2016/12/vender-produtos.png', 'Curso de php', $button);
-        
-        $template = new GenericTemplate($senderId);
-        $template->add($product);
-        $template->add($product2);     
-
-        $callSendApi->make($template->message('Que tal testarmos a abertura de um site?'));
-        
-        $button = new Button('web_url', null, 'https://angular.io');
-        $product = new Product('Produto 1', 'http://www.contabilidadetoledo.com.br/wp-content/uploads/2017/11/20171123.jpg', 'Curso de angular', $button);
-        
-        $button = new Button('web_url', null, 'http://php.net');
-        $product2 = new Product('Produto 2', 'https://mestredoadwords.com.br/wp-content/uploads/2016/12/vender-produtos.png', 'Curso de php', $button);
-        
-        $template = new ListTemplate($senderId);
-        $template->add($product);
-        $template->add($product2);
-
-        $callSendApi->make($template->message('Que tal testarmos a abertura de um site?'));
+        $bot->template('list', '', $products);
         
         return '';
     }
