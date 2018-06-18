@@ -1,14 +1,21 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url("https://fonts.googleapis.com/css?family=Material+Icons");
 
 // Variables
-@import "variables";
+@import "node_modules/materialize-css/sass/materialize";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+#main-nav{
+    a:hover, a:focus{
+        color: #fff;
+        text-decoration: none;
+    }
 }
