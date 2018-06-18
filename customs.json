@@ -1,0 +1,11 @@
+{
+    "elements": {},
+    "attributes": {
+        "@submit.prevent": {
+            "context": "form"
+        },
+        "v-model": {
+            "context": "input"
+        }
+    }
+}
