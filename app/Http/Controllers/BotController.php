@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use CodeBot\CallSendApi;
-use CodeBot\Message\Image;
-use CodeBot\Message\Text;
-use CodeBot\SenderRequest;
-use CodeBot\TemplatesMessage\ButtonsTemplate;
-use CodeBot\TemplatesMessage\GenericTemplate;
-use CodeBot\TemplatesMessage\ListTemplate;
+use CodeBot\Build\Solid;
 use CodeBot\Element\Button;
 use CodeBot\Element\Product;
+use CodeBot\SenderRequest;
 use CodeBot\WebHook;
 use Illuminate\Http\Request;
 use function abort;
