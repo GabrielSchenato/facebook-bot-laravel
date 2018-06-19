@@ -32,26 +32,32 @@
 
 <script>
     import swal from 'sweetalert'
-            export default {
-                data: function () {
-                    return {
-                        credentials: {
+    export default {
+        data: function() {
+            return {
+                credentials: {
 
-                        }
-                    }
-                },
-                methods: {
-                    login() {
-                        window.axios.post('/login', this.credentials).then((res) => {
-                            if (res.data.status === 'success') {
-                                swal('Autenticado com sucesso', 'Redirecionando para o painel', 'success')
-                                this.$router.push({path: '/'})
-
-                            } else {
-                                swal('Falha ao autenticar!', 'Usuário ou senha inválidos', 'error')
-                            }
-                        })
-                    }
                 }
             }
+        },
+        methods: {
+            login() {
+                window.axios.post('/login', this.credentials)
+                    .then((res) => {
+                        if (res.data.status === 'success') {
+                            swal('Autenticado com sucesso', 'Redirecionando para o painel', 'success')
+                            this.$router.push({
+                                path: '/'
+                            })
+
+                        } else {
+                            swal('Falha ao autenticar!', 'Usuário ou senha inválidos', 'error')
+                        }
+                    })
+                    .catch(() => {
+                        swal('Falha ao autenticar!', 'Usuário ou senha inválidos', 'error')
+                    })
+            }
+        }
+    }
 </script>

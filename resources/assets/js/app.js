@@ -14,8 +14,12 @@ router.beforeEach((to, from, next) => {
   let requiresAuth = to.meta.requiresAuth || false; 
   
   if(requiresAuth){
-        alert("Autenticação");
-        return next({path: 'login'});
+        return window.axios.get('/api/v1/users/me').then((res) => {
+            if(res.data.id === undefined) {
+                return next ({path: 'login'});
+            }
+            return next();
+        });
   }
   return next();
 });

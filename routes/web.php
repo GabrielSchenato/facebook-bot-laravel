@@ -22,4 +22,10 @@ Route::prefix('bot')
             Route::post('/webhook', 'BotController@receiveMessage');
     });
     
+Route::prefix('api/v1')
+        ->namespace('Api\V1')
+        ->group(function () {
+            Route::get('/users/me', 'UsersController@me');      
+        });
+    
 Auth::routes();
