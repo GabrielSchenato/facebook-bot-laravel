@@ -52,17 +52,30 @@
                 window.axios.post('/register', this.credentials)
                     .then((res) => {
                         if (res.data.status === 'success') {
-                            swal('Cadastrado com sucesso', 'Redirecionando para o painel', 'success')
+                            swal('Cadastrado com sucesso', 'Redirecionando para o painel', 'success', {timer: 1500})
                             this.$router.push({
                                 path: '/'
                             })
 
                         } else {
-                            swal('Falha ao cadastrar!', 'Favor tentar novamente', 'error')
+                            var ul = document.createElement("ul");
+                            let validation = '';
+                            if(res.data.email){
+                                validation += '<li>O e-mail já está sendo utilizado!</li>'
+                            }
+                            if(res.data.password){
+                                validation += '<li>A senha deve conter no minímo 6 caracteres!</li>'
+                            }
+                            ul.innerHTML = validation;
+                            swal({
+                                title: 'Falha ao cadastrar!',                                
+                                icon: 'error',
+                                content: ul
+                            })
                         }
                     })
                     .catch(() => {
-                        swal('Falha ao cadastrar!', 'Favor tentar novamente', 'error')
+                        swal('Falha ao cadastrar!', 'Erro no servidor', 'error')
                     })
             }
         }

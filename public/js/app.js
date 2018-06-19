@@ -1764,15 +1764,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             window.axios.post('/register', this.credentials).then(function (res) {
                 if (res.data.status === 'success') {
-                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Cadastrado com sucesso', 'Redirecionando para o painel', 'success');
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Cadastrado com sucesso', 'Redirecionando para o painel', 'success', { timer: 1500 });
                     _this.$router.push({
                         path: '/'
                     });
                 } else {
-                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Falha ao cadastrar!', 'Favor tentar novamente', 'error');
+                    var ul = document.createElement("ul");
+                    var validation = '';
+                    if (res.data.email) {
+                        validation += '<li>O e-mail já está sendo utilizado!</li>';
+                    }
+                    if (res.data.password) {
+                        validation += '<li>A senha deve conter no minímo 6 caracteres!</li>';
+                    }
+                    ul.innerHTML = validation;
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
+                        title: 'Falha ao cadastrar!',
+                        icon: 'error',
+                        content: ul
+                    });
                 }
             }).catch(function () {
-                __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Falha ao cadastrar!', 'Favor tentar novamente', 'error');
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Falha ao cadastrar!', 'Erro no servidor', 'error');
             });
         }
     }
