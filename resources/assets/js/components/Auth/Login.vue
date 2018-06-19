@@ -47,7 +47,7 @@
                 window.axios.post('/login', this.credentials)
                     .then((res) => {
                         if (res.data.status === 'success') {
-                            swal('Autenticado com sucesso', 'Redirecionando para o painel', 'success')
+                            swal('Autenticado com sucesso', 'Redirecionando para o painel', 'success',' {timer: 1000})
                             this.$router.push({
                                 path: '/'
                             })

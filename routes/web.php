@@ -23,6 +23,13 @@ Route::prefix('bot')
     });
     
 Route::prefix('api/v1')
+        ->middleware('auth')
+        ->namespace('Api\V1')
+        ->group(function () {
+            Route::resource('/users', 'UsersController');      
+        });
+        
+Route::prefix('api/v1')
         ->namespace('Api\V1')
         ->group(function () {
             Route::get('/users/me', 'UsersController@me');      
