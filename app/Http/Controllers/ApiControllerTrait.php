@@ -34,13 +34,16 @@ trait ApiControllerTrait
                     return $query;
                 })
                 ->where($where)
+                ->with($this->relationships())
                 ->paginate($limit);
         return response()->json($users);
     }
     
     public function show($id)
     {
-        $result = $this->model->findOrFail($id);
+        $result = $this->model
+                ->with($this->relationships())
+                ->findOrFail($id);
         return response()->json($result);
     }
     
@@ -62,5 +65,13 @@ trait ApiControllerTrait
         $result = $this->model->findOrFail($id);
         $result->delete();
         return response()->json($result);
+    }
+    
+    protected function relationships()
+    {
+        if(isset($this->relationships)){
+            return $this->relationships;
+        }
+        return [];
     }
 }

@@ -1634,9 +1634,73 @@ module.exports = {
 /***/ }),
 
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Auth/Login.vue":
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unterminated string constant (50:98)\n\n\u001b[0m \u001b[90m 48 | \u001b[39m                \u001b[33m.\u001b[39mthen((res) \u001b[33m=>\u001b[39m {\n \u001b[90m 49 | \u001b[39m                    \u001b[36mif\u001b[39m (res\u001b[33m.\u001b[39mdata\u001b[33m.\u001b[39mstatus \u001b[33m===\u001b[39m \u001b[32m'success'\u001b[39m) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 50 | \u001b[39m                        swal(\u001b[32m'Autenticado com sucesso'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Redirecionando para o painel'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'success'\u001b[39m\u001b[33m,\u001b[39m\u001b[32m' {timer: 1000})\u001b[39m\n \u001b[90m    | \u001b[39m                                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 51 | \u001b[39m                        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m$router\u001b[33m.\u001b[39mpush({\n \u001b[90m 52 | \u001b[39m                            path\u001b[33m:\u001b[39m \u001b[32m'/'\u001b[39m\n \u001b[90m 53 | \u001b[39m                        })\u001b[0m\n");
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__("./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            credentials: {}
+        };
+    },
+    methods: {
+        login: function login() {
+            var _this = this;
+
+            window.axios.post('/login', this.credentials).then(function (res) {
+                if (res.data.status === 'success') {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Autenticado com sucesso', 'Redirecionando para o painel', 'success', { timer: 1000 });
+                    _this.$router.push({
+                        path: '/'
+                    });
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Falha ao autenticar!', 'Usuário ou senha inválidos', 'error');
+                }
+            }).catch(function () {
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Falha ao autenticar!', 'Usuário ou senha inválidos', 'error');
+            });
+        }
+    }
+});
 
 /***/ }),
 
@@ -1751,11 +1815,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
