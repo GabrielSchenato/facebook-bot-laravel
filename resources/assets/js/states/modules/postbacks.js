@@ -27,6 +27,9 @@ export default {
         },
         updatePostback(context, data) {
             return window.axios.put('api/v1/postbacks/' + data.id, data.data)
+        },
+        removePostback(context, id) {
+            return window.axios.delete('api/v1/postbacks/' + id)
         }
     }
 }

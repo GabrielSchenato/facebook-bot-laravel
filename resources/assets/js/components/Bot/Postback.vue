@@ -5,7 +5,7 @@
         <div>
             <router-link
                 v-for="postback in postbacks.data"
-                class="waves-effect btn-large waves-light light-green btn-postback"
+                class="waves-effect waves-light btn-large light-green btn-postback"
                 :to="{path: '/postback/' + postback.id}"
                 >
                 {{ postback.value }}

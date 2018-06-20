@@ -1899,8 +1899,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             };
             this.$store.dispatch('updatePostback', data).then(function () {
-                __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Editado com sucesso!', 'O bot já deve responder a este postack', 'success', { timer: 1800 });
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Editado com sucesso!', 'O bot já deve responder a este postack', 'success', {
+                    timer: 1800
+                });
                 _this.showEditForm = false;
+            });
+        },
+        remove: function remove() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
+                title: "Removendo!!!",
+                text: "Você está removendo este postback e não poderá desfazer esta ação!",
+                icon: "warning",
+                buttons: ["Cancelar!", "Deletar!"],
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    _this2.$store.dispatch('removePostback', _this2.$route.params.id).then(function () {
+                        __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Removido!", "Removido com sucesso.", "success");
+                        _this2.$router.push("/");
+                    });
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Seu postback está salvo!", { timer: 1000 });
+                }
             });
         }
     },
@@ -32822,7 +32844,7 @@ var render = function() {
           "router-link",
           {
             staticClass:
-              "waves-effect btn-large waves-light light-green btn-postback",
+              "waves-effect waves-light btn-large light-green btn-postback",
             attrs: { to: { path: "/postback/" + postback.id } }
           },
           [_vm._v("\n                " + _vm._s(postback.value) + "\n        ")]
@@ -33119,7 +33141,7 @@ var render = function() {
             _vm._v(" "),
             _c("input", {
               staticClass: "btn",
-              attrs: { type: "submit", value: "Editar" }
+              attrs: { type: "submit", value: "Atualizar" }
             })
           ]
         )
@@ -33128,11 +33150,19 @@ var render = function() {
     _c(
       "p",
       [
-        _c("router-link", { attrs: { to: { path: "/" } } }, [_vm._v("Voltar")]),
+        _c(
+          "router-link",
+          {
+            staticClass: "btn waves-effect waves-light",
+            attrs: { to: { path: "/" } }
+          },
+          [_vm._v("Voltar")]
+        ),
         _vm._v(" "),
         _c(
           "a",
           {
+            staticClass: "btn blue waves-effect waves-light",
             attrs: { href: "" },
             on: {
               click: function($event) {
@@ -33144,7 +33174,20 @@ var render = function() {
           [_vm._v("Editar")]
         ),
         _vm._v(" "),
-        _c("a", { attrs: { href: "" } }, [_vm._v("Remover")])
+        _c(
+          "a",
+          {
+            staticClass: "btn red waves-effect waves-light",
+            attrs: { href: "" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.remove()
+              }
+            }
+          },
+          [_vm._v("Remover")]
+        )
       ],
       1
     )
@@ -48430,6 +48473,9 @@ module.exports = Component.exports
         },
         updatePostback: function updatePostback(context, data) {
             return window.axios.put('api/v1/postbacks/' + data.id, data.data);
+        },
+        removePostback: function removePostback(context, id) {
+            return window.axios.delete('api/v1/postbacks/' + id);
         }
     }
 });

@@ -8,13 +8,13 @@
                 <input id="value_to_postback" type="text" v-model="postback.value" required="">
                 <label for="value_to_postback" class="active">Identificação do postback</label>
             </div>
-            <input type="submit" value="Editar" class="btn">
+            <input type="submit" value="Atualizar" class="btn">
         </form>
         
         <p>
-            <router-link :to="{path: '/'}">Voltar</router-link>
-            <a @click.prevent="showEditForm = !showEditForm" href="">Editar</a>
-            <a href="">Remover</a>
+            <router-link :to="{path: '/'}" class="btn waves-effect waves-light">Voltar</router-link>
+            <a @click.prevent="showEditForm = !showEditForm" href="" class="btn blue waves-effect waves-light">Editar</a>
+            <a @click.prevent="remove()" href="" class="btn red waves-effect waves-light">Remover</a>
         </p>
     </div>
 </template>
@@ -22,24 +22,46 @@
 <script>
     import swal from 'sweetalert'
     export default {
-        data: function () {
+        data: function() {
             return {
                 showEditForm: false
             }
         },
         methods: {
             save() {
-               let data = {
-                   id: this.$route.params.id,
-                   data: {
-                       value: this.postback.value
-                   }
-               } 
-               this.$store.dispatch('updatePostback', data).then(() => {
-                   swal('Editado com sucesso!', 'O bot já deve responder a este postack', 'success', {timer: 1800})
-                   this.showEditForm = false
-               })
-            }
+                    let data = {
+                        id: this.$route.params.id,
+                        data: {
+                            value: this.postback.value
+                        }
+                    }
+                    this.$store.dispatch('updatePostback', data).then(() => {
+                        swal('Editado com sucesso!', 'O bot já deve responder a este postack', 'success', {
+                            timer: 1800
+                        })
+                        this.showEditForm = false
+                    })
+                },
+                remove() {
+                    swal({
+                            title: "Removendo!!!",
+                            text: "Você está removendo este postback e não poderá desfazer esta ação!",
+                            icon: "warning",
+                            buttons: ["Cancelar!", "Deletar!"],
+                            dangerMode: true
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                this.$store.dispatch('removePostback', this.$route.params.id).then(() => {
+                                    swal("Removido!", "Removido com sucesso.", "success")
+                                    this.$router.push("/")
+                                })
+                            } else {
+                                swal("Seu postback está salvo!", {timer: 1000});
+                            }
+                        })
+
+                }
         },
         computed: {
             postback() {
