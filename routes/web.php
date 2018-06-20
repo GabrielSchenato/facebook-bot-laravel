@@ -26,7 +26,7 @@ Route::prefix('api/v1')
         ->middleware('auth')
         ->namespace('Api\V1')
         ->group(function () {
-            //Route::resource('/users', 'UsersController');      
+            Route::resource('/postbacks', 'PostbacksController');      
         });
         
 Route::prefix('api/v1')
