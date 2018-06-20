@@ -18,12 +18,20 @@
             <a @click.prevent="showEditForm = !showEditForm" href="" class="btn blue waves-effect waves-light">Editar</a>
             <a @click.prevent="remove()" href="" class="btn red waves-effect waves-light">Remover</a>
         </p>
+        
+        <message></message>
+        
     </div>
 </template>
 
 <script>
     import swal from 'sweetalert'
+    import message from './Message'
+    
     export default {
+        components: {
+            'message': message
+        },
         data: function() {
             return {
                 showEditForm: false
