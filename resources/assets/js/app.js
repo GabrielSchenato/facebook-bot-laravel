@@ -28,10 +28,11 @@ router.beforeEach((to, from, next) => {
   return next();
 });
 
-const store = Vuex.Store(VuexStore)
+const store = new Vuex.Store(VuexStore)
 
 const app = new Vue({
     el: '#app',
     template: '<div><router-view class="container"></router-view></div>',
-    router
+    router,
+    store
 });
