@@ -1880,6 +1880,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -33158,6 +33160,28 @@ var render = function() {
           },
           [_vm._v("Voltar")]
         ),
+        _vm._v(" "),
+        !_vm.postback.get_started
+          ? _c(
+              "a",
+              {
+                staticClass: "btn green waves-effect waves-light",
+                attrs: { href: "" }
+              },
+              [_vm._v("Definir como botão começar")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.postback.get_started
+          ? _c(
+              "a",
+              {
+                staticClass: "btn green waves-effect waves-light",
+                attrs: { href: "" }
+              },
+              [_vm._v("Remover botão começar")]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "a",

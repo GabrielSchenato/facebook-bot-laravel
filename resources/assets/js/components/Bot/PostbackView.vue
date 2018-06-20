@@ -13,6 +13,8 @@
         
         <p>
             <router-link :to="{path: '/'}" class="btn waves-effect waves-light">Voltar</router-link>
+            <a href="" v-if="!postback.get_started" class="btn green waves-effect waves-light">Definir como botão começar</a>
+            <a href="" v-if="postback.get_started" class="btn green waves-effect waves-light">Remover botão começar</a>
             <a @click.prevent="showEditForm = !showEditForm" href="" class="btn blue waves-effect waves-light">Editar</a>
             <a @click.prevent="remove()" href="" class="btn red waves-effect waves-light">Remover</a>
         </p>
