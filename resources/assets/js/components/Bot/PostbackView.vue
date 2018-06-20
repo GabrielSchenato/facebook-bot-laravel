@@ -23,10 +23,10 @@
 
     <div class="card light-green">
         <div class="card-content">
-            <form id="formNewMessage">
+            <form id="formNewMessage" @submit.prevent="newMessage()">
                 <h5>Nova mensagem</h5>
                 <div class="input-filter">
-                    <select class="browser-default">
+                    <select class="browser-default" required v-model="dataToSave.type">
                         <option value="" disabled>Tipo da mensagem</option>
                         <optgroup label="Mensagem">
                             <option value="text">Texto</option>
@@ -38,7 +38,7 @@
                     </select>
                 </div>
                 <div id="messageField" class="input-field">
-                    <input type="text" required>
+                    <input type="text" required v-model="dataToSave.message">
                     <label>Mensagem</label>
                 </div>
                 <input id="messageSaveBtn" type="submit" value="+" class="btn green">
@@ -59,7 +59,10 @@
         },
         data: function() {
             return {
-                showEditForm: false
+                showEditForm: false,
+                dataToSave: {
+                    type: ''
+                }
             }
         },
         methods: {
@@ -143,7 +146,38 @@
                             }
                         })
 
+                },
+            newMessage() {
+                let $ = window.jQuery;
+                $('#messageSaveBtn').val('Aguarde...').attr('disabled', true)
+
+                let data = {
+                    type: this.dataToSave.type || 'text',
+                    message: this.dataToSave.message,
+                    template: false,
+                    postback_id: this.$route.params.id
                 }
+
+                let messageTypes = [
+                    'text',
+                    'file',
+                    'audio',
+                    'image',
+                    'video'
+                ]
+
+                if(messageTypes.indexOf(data.type) === -1){
+                    data.template = true
+                }
+
+                this.$store.dispatch('newMessage', data).then(() => {
+                    $('#messageSaveBtn').val('+').attr('disabled', false)
+                    swal('Salvo com sucesso!', 'O bot já deve responder com a mensagem que você criou.', 'success')
+                    this.dataToSave = { type: 'text' };
+                    this.$store.dispatch('getPostback', this.$route.params.id)
+                })
+            }
+                
         },
         computed: {
             postback() {
