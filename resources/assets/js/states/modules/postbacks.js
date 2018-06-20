@@ -30,6 +30,12 @@ export default {
         },
         removePostback(context, id) {
             return window.axios.delete('api/v1/postbacks/' + id)
+        },
+        addGetStarted(context, id) {
+            return window.axios.post('api/v1/postbacks/get-started-button/' + id)
+        },
+        removeGetStarted(context) {
+            return window.axios.delete('api/v1/postbacks/get-started-button')
         }
     }
 }

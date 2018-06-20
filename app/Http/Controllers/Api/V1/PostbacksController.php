@@ -22,7 +22,7 @@ class PostbacksController extends Controller
 
     public function setGetStartedButton($id)
     {
-        $postback = Postback::where('id', $id)->firtOrFail();
+        $postback = Postback::where('id', $id)->firstOrFail();
 
         Postback::where(['get_started' => true])
                 ->update(['get_started' => false]);

@@ -1926,6 +1926,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Seu postback está salvo!", { timer: 1000 });
                 }
             });
+        },
+        addGetStartedButton: function addGetStartedButton() {
+            var _this3 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
+                title: "Botão começar!!!",
+                text: "Você tem certeza que quer definir este postback como ação do botão começar?",
+                icon: "warning",
+                buttons: ["Não!", "Sim!"]
+            }).then(function (willAdd) {
+                if (willAdd) {
+                    _this3.$store.dispatch('addGetStarted', _this3.$route.params.id).then(function () {
+                        __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Processo concluido!", "Botão começar agora vai começar a responder por este postback", "success");
+                        _this3.$store.dispatch('getPostback', _this3.$route.params.id);
+                    });
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Nada mudou!", { timer: 800 });
+                }
+            });
+        },
+        removeGetStartedButton: function removeGetStartedButton() {
+            var _this4 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
+                title: "Removendo botão começar!!!",
+                text: "Você está desativando o botão começar, você poderá desfazer essa ação a qualquer momento!",
+                icon: "warning",
+                buttons: ["Cancelar!", "Deletar!"],
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    _this4.$store.dispatch('removeGetStarted').then(function () {
+                        __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Botão começar desativado!", "Para desfazer essa ação clique em Definir como botão começar.", "success");
+                    });
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Seu botão está salvo!", { timer: 1000 });
+                }
+            });
         }
     },
     computed: {
@@ -33166,7 +33204,13 @@ var render = function() {
               "a",
               {
                 staticClass: "btn green waves-effect waves-light",
-                attrs: { href: "" }
+                attrs: { href: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.addGetStartedButton()
+                  }
+                }
               },
               [_vm._v("Definir como botão começar")]
             )
@@ -33177,7 +33221,13 @@ var render = function() {
               "a",
               {
                 staticClass: "btn green waves-effect waves-light",
-                attrs: { href: "" }
+                attrs: { href: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.removeGetStartedButton()
+                  }
+                }
               },
               [_vm._v("Remover botão começar")]
             )
@@ -48500,6 +48550,12 @@ module.exports = Component.exports
         },
         removePostback: function removePostback(context, id) {
             return window.axios.delete('api/v1/postbacks/' + id);
+        },
+        addGetStarted: function addGetStarted(context, id) {
+            return window.axios.post('api/v1/postbacks/get-started-button/' + id);
+        },
+        removeGetStarted: function removeGetStarted(context) {
+            return window.axios.delete('api/v1/postbacks/get-started-button');
         }
     }
 });
