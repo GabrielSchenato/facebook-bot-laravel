@@ -24,6 +24,9 @@ export default {
         },
         newPostback(context, data) {
             return window.axios.post('api/v1/postbacks', data)
+        },
+        updatePostback(context, data) {
+            return window.axios.put('api/v1/postbacks/' + data.id, data.data)
         }
     }
 }

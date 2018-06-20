@@ -51,6 +51,7 @@
 <style>
     #form-new-postback {
         margin-top: 30px;
+        margin-bottom: 30px;
     }
     .btn-postback {
         display:block;

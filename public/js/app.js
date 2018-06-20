@@ -1857,6 +1857,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__("./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1865,7 +1881,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            showEditForm: false
+        };
+    },
+    methods: {
+        save: function save() {
+            var _this = this;
+
+            var data = {
+                id: this.$route.params.id,
+                data: {
+                    value: this.postback.value
+                }
+            };
+            this.$store.dispatch('updatePostback', data).then(function () {
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Editado com sucesso!', 'O bot já deve responder a este postack', 'success', { timer: 1800 });
+                _this.showEditForm = false;
+            });
+        }
+    },
     computed: {
         postback: function postback() {
             return this.$store.state.postback.postback;
@@ -1886,7 +1924,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n#form-new-postback {\n    margin-top: 30px;\n}\n.btn-postback {\n    display:block;\n    text-align: left;\n    margin-bottom: 10px;\n}\n", ""]);
+exports.push([module.i, "\n#form-new-postback {\n    margin-top: 30px;\n    margin-bottom: 30px;\n}\n.btn-postback {\n    display:block;\n    text-align: left;\n    margin-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -33033,7 +33071,83 @@ var render = function() {
     _c("h3", [
       _c("small", [_vm._v("Postbacks:")]),
       _vm._v(" " + _vm._s(_vm.postback.value))
-    ])
+    ]),
+    _vm._v(" "),
+    _vm.showEditForm
+      ? _c(
+          "form",
+          {
+            attrs: { id: "form-new-postback" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.save()
+              }
+            }
+          },
+          [
+            _c("legend", [_vm._v("Editar postback")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-field" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.postback.value,
+                    expression: "postback.value"
+                  }
+                ],
+                attrs: { id: "value_to_postback", type: "text", required: "" },
+                domProps: { value: _vm.postback.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.postback, "value", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "active", attrs: { for: "value_to_postback" } },
+                [_vm._v("Identificação do postback")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "btn",
+              attrs: { type: "submit", value: "Editar" }
+            })
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "p",
+      [
+        _c("router-link", { attrs: { to: { path: "/" } } }, [_vm._v("Voltar")]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            attrs: { href: "" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.showEditForm = !_vm.showEditForm
+              }
+            }
+          },
+          [_vm._v("Editar")]
+        ),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "" } }, [_vm._v("Remover")])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -48313,6 +48427,9 @@ module.exports = Component.exports
         },
         newPostback: function newPostback(context, data) {
             return window.axios.post('api/v1/postbacks', data);
+        },
+        updatePostback: function updatePostback(context, data) {
+            return window.axios.put('api/v1/postbacks/' + data.id, data.data);
         }
     }
 });
