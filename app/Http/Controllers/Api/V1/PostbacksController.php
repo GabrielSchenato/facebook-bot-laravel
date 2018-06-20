@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiControllerTrait;
 use App\Http\Controllers\Controller;
 use App\Postback;
 use CodeBot\Build\Solid;
+use GuzzleHttp\Exception\RequestException;
 
 class PostbacksController extends Controller
 {
@@ -19,7 +20,7 @@ class PostbacksController extends Controller
         $this->model = $model;
     }
 
-    public function setGetStarted($id)
+    public function setGetStartedButton($id)
     {
         $postback = Postback::where('id', $id)->firtOrFail();
 
@@ -33,6 +34,25 @@ class PostbacksController extends Controller
         Solid::setPageAccessToken(config('botfb.pageAccessToken'));
 
         $bot->addGetStartedButton($postback->value);
+
+        return response()->json(['status' => 'ok']);
+    }
+
+    public function removeGetStartedButton()
+    {
+        $bot = Solid::factory();
+        Solid::setPageAccessToken(config('botfb.pageAccessToken'));
+
+        try {
+            $bot->removeGetStartedButton();
+        } catch (RequestException $e) {
+            return (string) $e->getResponse()->getBody();
+        }
+
+        Postback::where(['get_started' => true])
+                ->update(['get_started' => false]);
+
+        return response()->json(['status' => 'ok']);
     }
 
 }

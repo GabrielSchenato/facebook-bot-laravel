@@ -26,6 +26,8 @@ Route::prefix('api/v1')
         ->middleware('auth')
         ->namespace('Api\V1')
         ->group(function () {
+            Route::post('/postbacks/get-started-button/{id}', 'PostbacksController@setGetStartedButton');  
+            Route::delete('/postbacks/get-started-button', 'PostbacksController@removeGetStartedButton'); 
             Route::resource('/postbacks', 'PostbacksController');      
         });
         
