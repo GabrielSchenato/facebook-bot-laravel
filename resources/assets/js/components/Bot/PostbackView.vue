@@ -20,6 +20,31 @@
         </p>
         
         <message></message>
+
+    <div class="card light-green">
+        <div class="card-content">
+            <form id="formNewMessage">
+                <h5>Nova mensagem</h5>
+                <div class="input-filter">
+                    <select class="browser-default">
+                        <option value="" disabled>Tipo da mensagem</option>
+                        <optgroup label="Mensagem">
+                            <option value="text">Texto</option>
+                            <option value="file">Arquivo</option>
+                            <option value="audio">Áudio</option>
+                            <option value="image">Imagem</option>
+                            <option value="video">Vídeo</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div id="messageField" class="input-field">
+                    <input type="text" required>
+                    <label>Mensagem</label>
+                </div>
+                <input id="messageSaveBtn" type="submit" value="+" class="btn green">
+            </form>
+        </div>
+    </div>
         
     </div>
 </template>
@@ -130,3 +155,23 @@
         }
     }
 </script>
+
+<style>
+#messageField {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 2px;
+
+}
+#messageField input {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+#messageField label{
+    left: 10px;
+}
+#formNewMessage h5{
+    color: #fff;
+}
+</style>
