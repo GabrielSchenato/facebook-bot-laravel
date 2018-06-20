@@ -24,16 +24,20 @@ class PostbacksController extends Controller
     {
         $postback = Postback::where('id', $id)->firstOrFail();
 
-        Postback::where(['get_started' => true])
-                ->update(['get_started' => false]);
-
-        $postback->get_started = true;
-        $postback->save();
-
         $bot = Solid::factory();
         Solid::setPageAccessToken(config('botfb.pageAccessToken'));
-
-        $bot->addGetStartedButton($postback->value);
+        
+        try {
+            $bot->addGetStartedButton($postback->value);
+        } catch (RequestException $e) {
+            return (string) $e->getResponse()->getBody();
+        }
+        
+        Postback::where(['get_started' => true])
+                ->update(['get_started' => false]);
+        
+        $postback->get_started = true;
+        $postback->save();
 
         return response()->json(['status' => 'ok']);
     }

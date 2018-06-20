@@ -1957,8 +1957,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 dangerMode: true
             }).then(function (willDelete) {
                 if (willDelete) {
-                    _this4.$store.dispatch('removeGetStarted').then(function () {
-                        __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Botão começar desativado!", "Para desfazer essa ação clique em Definir como botão começar.", "success");
+                    _this4.$store.dispatch('removeGetStarted').then(function (res) {
+                        var err = res.data.error || null;
+                        if (err) {
+                            var message = 'Algo deu errado';
+                            if (err.code === 100) {
+                                message = 'Você precisa manter o botão começar, ele é necessario para a exibição do menu, remova o menu primeiro!';
+                            }
+                            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Erro", message, 'error');
+                        } else {
+                            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Botão começar desativado!", "Para desfazer essa ação clique em Definir como botão começar.", "success");
+                        }
                     });
                 } else {
                     __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Seu botão está salvo!", { timer: 1000 });
@@ -32887,7 +32896,15 @@ var render = function() {
               "waves-effect waves-light btn-large light-green btn-postback",
             attrs: { to: { path: "/postback/" + postback.id } }
           },
-          [_vm._v("\n                " + _vm._s(postback.value) + "\n        ")]
+          [
+            postback.get_started
+              ? _c("i", { staticClass: "material-icons" }, [_vm._v("done_all")])
+              : _vm._e(),
+            _vm._v(" " + _vm._s(postback.value) + " "),
+            postback.get_started
+              ? _c("small", [_vm._v("Botão começar")])
+              : _vm._e()
+          ]
         )
       })
     ),

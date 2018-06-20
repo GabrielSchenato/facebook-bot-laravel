@@ -8,7 +8,7 @@
                 class="waves-effect waves-light btn-large light-green btn-postback"
                 :to="{path: '/postback/' + postback.id}"
                 >
-                {{ postback.value }}
+                <i class="material-icons" v-if="postback.get_started">done_all</i> {{ postback.value }} <small v-if="postback.get_started">Botão começar</small>
         </router-link>
     </div>
 

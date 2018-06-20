@@ -93,8 +93,17 @@
                         })
                         .then((willDelete) => {
                             if (willDelete) {
-                                this.$store.dispatch('removeGetStarted').then(() => {
-                                    swal("Botão começar desativado!", "Para desfazer essa ação clique em Definir como botão começar.", "success")
+                                this.$store.dispatch('removeGetStarted').then((res) => {
+                                    let err = res.data.error || null;
+                                    if(err){
+                                        let message = 'Algo deu errado'
+                                        if(err.code === 100){
+                                            message = 'Você precisa manter o botão começar, ele é necessario para a exibição do menu, remova o menu primeiro!'
+                                        }
+                                        swal("Erro", message, 'error')
+                                    }else{
+                                        swal("Botão começar desativado!", "Para desfazer essa ação clique em Definir como botão começar.", "success")
+                                    }
                                 })
                             } else {
                                 swal("Seu botão está salvo!", {timer: 1000});
