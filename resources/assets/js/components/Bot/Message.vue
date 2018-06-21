@@ -1,10 +1,10 @@
 <template>
     <div class="card">
-        <span class="green white-text badge">text</span>
+        <span class="green white-text badge">{{ message.type }}</span>
 
         <div class="card-content">
             <blockquote>
-                <strong>Mensagem:</strong>Bla Bla Bla
+                <strong>Mensagem:</strong> {{ message.message }}
             </blockquote>            
         </div>
         <div class="card-action">
@@ -16,5 +16,13 @@
 
 <script>
     export default {
+        props: [
+            'messageData'
+        ],
+        computed: {
+            message: function () {
+                return this.messageData
+            }
+        }
     }
 </script>

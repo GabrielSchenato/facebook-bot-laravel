@@ -1815,7 +1815,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['messageData'],
+    computed: {
+        message: function message() {
+            return this.messageData;
+        }
+    }
+});
 
 /***/ }),
 
@@ -33397,7 +33404,9 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("message"),
+      _vm._l(_vm.postback.messages, function(message) {
+        return _c("message", { attrs: { "message-data": message } })
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "card light-green" }, [
         _c("div", { staticClass: "card-content" }, [
@@ -33497,7 +33506,7 @@ var render = function() {
         ])
       ])
     ],
-    1
+    2
   )
 }
 var staticRenderFns = [
@@ -33536,28 +33545,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card" }, [
+    _c("span", { staticClass: "green white-text badge" }, [
+      _vm._v(_vm._s(_vm.message.type))
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-content" }, [
+      _c("blockquote", [
+        _c("strong", [_vm._v("Mensagem:")]),
+        _vm._v(" " + _vm._s(_vm.message.message) + "\n        ")
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("span", { staticClass: "green white-text badge" }, [_vm._v("text")]),
+    return _c("div", { staticClass: "card-action" }, [
+      _c("a", { attrs: { href: "" } }, [_vm._v("Editar")]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-content" }, [
-        _c("blockquote", [
-          _c("strong", [_vm._v("Mensagem:")]),
-          _vm._v("Bla Bla Bla\n        ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-action" }, [
-        _c("a", { attrs: { href: "" } }, [_vm._v("Editar")]),
-        _vm._v(" "),
-        _c("a", { attrs: { href: "" } }, [_vm._v("Remover")])
-      ])
+      _c("a", { attrs: { href: "" } }, [_vm._v("Remover")])
     ])
   }
 ]
