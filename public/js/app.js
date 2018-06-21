@@ -2181,8 +2181,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['messageData'],
+    data: function data() {
+        return {
+            message: this.messageData,
+            dataToSave: {
+                type: ''
+            },
+            elements: { data: [] }
+        };
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-07b028fc\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Bot/Templates/Buttons.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#button-add {\n    margin-top: 40px;\n    padding: 10px;\n    border-radius: 2px;\n}\n.btn-floating {\n    width: 20px;\n    height: 20px;\n    line-height: 20px;\n}\n.btn-floating i {\n    font-size: 15px;\n    line-height: 20px;\n}\n", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -32924,14 +32984,178 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm.elements.data.length > 0
+      ? _c(
+          "div",
+          [
+            _c("strong", [_vm._v("Botões: ")]),
+            _vm._v(" "),
+            _vm._l(_vm.elements.data, function(element) {
+              return _c("div", { staticClass: "chip" }, [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(element.title) +
+                    " - postback: " +
+                    _vm._s(element.postback) +
+                    "\n            "
+                ),
+                _vm._m(0, true)
+              ])
+            })
+          ],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("form", { staticClass: "grey lighten-4", attrs: { id: "button-add" } }, [
+      _c("strong", [_vm._v("Novo botão:")]),
+      _vm._v(" "),
+      _c("div", {}, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.dataToSave.type,
+                expression: "dataToSave.type"
+              }
+            ],
+            staticClass: "browser-default",
+            attrs: { required: "" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.dataToSave,
+                  "type",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
+              _vm._v("Escolha o tipo do botão")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "postback" } }, [
+              _vm._v("Postback")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "web_url" } }, [_vm._v("Link")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "web_url_compact" } }, [
+              _vm._v("Web View Compacta")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "web_url_tall" } }, [
+              _vm._v("Web View Alta")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "web_url_full" } }, [
+              _vm._v("Web View Completa")
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-field inline" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.dataToSave.title,
+              expression: "dataToSave.title"
+            }
+          ],
+          attrs: {
+            type: "text",
+            placeholder: "Título do botão...",
+            required: "",
+            maxlength: "20"
+          },
+          domProps: { value: _vm.dataToSave.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.dataToSave, "title", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "active" }, [_vm._v("Título")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-field inline" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.dataToSave.postback,
+              expression: "dataToSave.postback"
+            }
+          ],
+          attrs: {
+            type: "text",
+            placeholder: "Qual destino...",
+            required: "",
+            maxlength: "20"
+          },
+          domProps: { value: _vm.dataToSave.postback },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.dataToSave, "postback", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "active" }, [_vm._v("Destino")])
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "btn",
+        attrs: { id: "elementSaveBtn", type: "submit", value: "+" }
+      })
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("\n        Botões\n    ")])])
+    return _c("a", { staticClass: "btn-floating red", attrs: { href: "" } }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("close")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card red" }, [
+      _c("div", { staticClass: "card-content white-text" }, [
+        _vm._v("\n            Nenhum botão...\n        ")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -36482,6 +36706,33 @@ if (inBrowser && window.Vue) {
 
 /* harmony default export */ __webpack_exports__["a"] = (VueRouter);
 
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-07b028fc\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Bot/Templates/Buttons.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-07b028fc\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Bot/Templates/Buttons.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("15de27d1", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-07b028fc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Buttons.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-07b028fc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Buttons.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 
@@ -49136,6 +49387,10 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-07b028fc\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Bot/Templates/Buttons.vue")
+}
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
 var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Bot/Templates/Buttons.vue")
@@ -49144,7 +49399,7 @@ var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/templa
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
