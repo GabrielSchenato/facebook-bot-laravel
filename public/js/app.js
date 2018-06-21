@@ -1814,6 +1814,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['messageData'],
@@ -33554,7 +33571,41 @@ var render = function() {
       _c("blockquote", [
         _c("strong", [_vm._v("Mensagem:")]),
         _vm._v(" " + _vm._s(_vm.message.message) + "\n        ")
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.message.type === "image"
+        ? _c("img", {
+            staticClass: "responsive-img",
+            attrs: { src: _vm.message.message }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.message.type === "audio"
+        ? _c("audio", { attrs: { controls: "" } }, [
+            _c("source", { attrs: { src: _vm.message.message } })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.message.type === "video"
+        ? _c("div", { staticClass: "video-container" }, [
+            _c(
+              "video",
+              { staticStyle: { "max-width": "100%" }, attrs: { controls: "" } },
+              [_c("source", { attrs: { src: _vm.message.message } })]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.message.type === "file"
+        ? _c("blockquote", [
+            _c("a", { attrs: { href: _vm.message.message } }, [
+              _c("i", { staticClass: "material-icons" }, [
+                _vm._v("attach_file")
+              ]),
+              _vm._v(" Arquivo para download")
+            ])
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _vm._m(0)
