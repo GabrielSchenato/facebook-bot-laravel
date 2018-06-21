@@ -1831,9 +1831,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['messageData'],
+    data: function data() {
+        return {
+            currentMessage: null,
+            showEditForm: false
+        };
+    },
+    methods: {
+        update: function update(message) {
+            var _this = this;
+
+            var data = {
+                id: this.message.id,
+                data: {
+                    type: this.message.type,
+                    message: message
+                }
+            };
+            this.$store.dispatch('updateMessage', data).then(function () {
+                swal('Salvo com sucesso!', 'O bot já deve responder com esta atualização', 'success');
+                _this.message.message = message;
+                _this.showEditForm = false;
+                _this.$store.dispatch('getPostback', _this.$route.params.id);
+            });
+        },
+        remove: function remove() {
+            var _this2 = this;
+
+            swal({
+                title: "Removendo!!!",
+                text: "Você está removendo esta mensagem e não poderá desfazer esta ação!",
+                icon: "warning",
+                buttons: ["Cancelar!", "Deletar!"],
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    _this2.$store.dispatch('removeMessage', _this2.message.id).then(function () {
+                        swal("Removido!", "Removido com sucesso.", "success");
+                        _this2.$store.dispatch('getPostback', _this2.$route.params.id);
+                    });
+                } else {
+                    swal("Sua mensagem está salva!", { timer: 1000 });
+                }
+            });
+        }
+    },
     computed: {
         message: function message() {
             return this.messageData;
@@ -33605,24 +33661,109 @@ var render = function() {
               _vm._v(" Arquivo para download")
             ])
           ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showEditForm
+        ? _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.update(_vm.currentMessage)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "input-field" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currentMessage,
+                      expression: "currentMessage"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Mensagem ou url...",
+                    required: ""
+                  },
+                  domProps: { value: _vm.currentMessage },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.currentMessage = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "active" }, [_vm._v("Mensagem")])
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "btn",
+                attrs: {
+                  id: "messageSaveBtn",
+                  type: "submit",
+                  value: "Atualizar"
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "btn lime",
+                attrs: { type: "button", value: "Cancelar" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.showEditForm = !_vm.showEditForm
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("hr")
+            ]
+          )
         : _vm._e()
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    _c("div", { staticClass: "card-action" }, [
+      _c(
+        "a",
+        {
+          attrs: { href: "" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.showEditForm = !_vm.showEditForm
+              _vm.currentMessage = _vm.message.message
+            }
+          }
+        },
+        [_vm._v("Editar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          attrs: { href: "" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.remove()
+            }
+          }
+        },
+        [_vm._v("Remover")]
+      )
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-action" }, [
-      _c("a", { attrs: { href: "" } }, [_vm._v("Editar")]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "" } }, [_vm._v("Remover")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
