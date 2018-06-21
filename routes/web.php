@@ -30,6 +30,7 @@ Route::prefix('api/v1')
             Route::delete('/postbacks/get-started-button', 'PostbacksController@removeGetStartedButton'); 
             Route::resource('/postbacks', 'PostbacksController');    
             Route::resource('/messages', 'MessagesController');    
+            Route::resource('/elements', 'ElementsController');   
         });
         
 Route::prefix('api/v1')
