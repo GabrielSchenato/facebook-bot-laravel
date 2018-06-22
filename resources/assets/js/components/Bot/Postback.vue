@@ -2,25 +2,31 @@
     <div>
         <h3>Postbacks</h3>
 
-        <div>
+        <div v-if="postbacks.data.length > 0">
             <router-link
                 v-for="postback in postbacks.data"
                 class="waves-effect waves-light btn-large light-green btn-postback"
                 :to="{path: '/postback/' + postback.id}"
                 >
                 <i class="material-icons" v-if="postback.get_started">done_all</i> {{ postback.value }} <small v-if="postback.get_started">Botão começar</small>
-        </router-link>
-    </div>
-
-    <form @submit.prevent="save()" id="form-new-postback">
-        <legend>Novo postback</legend>
-        <div class="input-field">
-            <input id="value_to_postback" type="text" v-model="title" required="">
-            <label for="value_to_postback">Identificação do postback</label>
+            </router-link>
         </div>
-        <input type="submit" value="+" class="btn">
-    </form>
-</div>
+
+        <div class="card red" v-if="postbacks.data.length === 0">
+            <div class="card-content white-text">
+                Nenhum postback...
+            </div>
+        </div>
+
+        <form @submit.prevent="save()" id="form-new-postback">
+            <legend>Novo postback</legend>
+            <div class="input-field">
+                <input id="value_to_postback" type="text" v-model="title" required="">
+                <label for="value_to_postback">Identificação do postback</label>
+            </div>
+            <input type="submit" value="+" class="btn">
+        </form>
+    </div>
 </template>
 
 <script>

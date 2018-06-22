@@ -31,6 +31,7 @@ Route::prefix('api/v1')
             Route::resource('/postbacks', 'PostbacksController');    
             Route::resource('/messages', 'MessagesController');    
             Route::resource('/elements', 'ElementsController');   
+            Route::resource('/products', 'ProductsController');   
         });
         
 Route::prefix('api/v1')

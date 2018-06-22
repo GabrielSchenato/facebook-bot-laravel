@@ -13,6 +13,6 @@ class Product extends Model
     
     protected function getImageFullUrlAttribute()
     {
-        return 'https://s3-'.env('AWS_REGION').'.amazonaws.com/'.env('AWS_BUCKET').'/products/'.$this->attributes['image_url'];
+        return 'https://s3-'.env('AWS_DEFAULT_REGION').'.amazonaws.com/'.env('AWS_BUCKET').'/products/'.$this->attributes['image_url'];
     }
 }
