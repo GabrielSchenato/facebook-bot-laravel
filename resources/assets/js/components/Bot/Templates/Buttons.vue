@@ -1,20 +1,20 @@
 <template>
     <div>
         <div v-if="elements.data.length > 0">
-            <strong>Botões: </strong>
+            <p><strong>Botões: </strong></p>
             <div v-for="element in elements.data" class="chip">
                 {{ element.title }} - postback: {{ element.postback }}
-                <a href="" class="btn-floating red"><i class="material-icons">close</i></a>
+                <a href="" class="btn-floating red" @click.prevent="removeButton(element.id)"><i class="material-icons">close</i></a>
             </div>
         </div>
 
-        <div class="card red">
+        <div class="card red" v-if="elements.data.length === 0">
             <div class="card-content white-text">
                 Nenhum botão...
             </div>
         </div>
 
-        <form class="grey lighten-4" id="button-add">
+        <form class="grey lighten-4" id="button-add" @submit.prevent="newButton()">
             <strong>Novo botão:</strong>
             <div class="">
                 <select class="browser-default" v-model="dataToSave.type" required>
@@ -31,7 +31,7 @@
                 <label class="active">Título</label>
             </div>
             <div class="input-field inline">
-                <input type="text" placeholder="Qual destino..." v-model="dataToSave.postback" required maxlength="20">
+                <input type="text" placeholder="Qual destino..." v-model="dataToSave.postback" required>
                 <label class="active">Destino</label>
             </div>
             <input id="elementSaveBtn" type="submit" value="+" class="btn">
@@ -53,6 +53,50 @@
                 },
                 elements: {data: []}
             }
+        },
+        methods: {
+            newButton() {
+                let data = {
+                    type: this.dataToSave.type,
+                    title: this.dataToSave.title,
+                    postback: this.dataToSave.postback,
+                    message_id: this.message.id
+                }
+                
+                if(data.type === 'web_url_compact'){
+                    data.type = 'web_url'
+                    data.webview_height_ratio = 'compact'
+                }
+                
+                if(data.type === 'web_url_tall'){
+                    data.type = 'web_url'
+                    data.webview_height_ratio = 'tall'
+                }
+                
+                if(data.type === 'web_url_full'){
+                    data.type = 'web_url'
+                    data.webview_height_ratio = 'full'
+                }
+                
+                this.$store.dispatch('newElement', data).then(() => {
+                    this.dataToSave = { type: '' }
+                    this.$store.dispatch('getElements', this.message_id).then((response) => {
+                        this.elements = response.data
+                    })
+                })
+            },
+            removeButton(id) {
+                this.$store.dispatch('removeElement', id).then(() => {
+                    this.$store.dispatch('getElements', this.message_id).then((response) => {
+                        this.elements = response.data
+                    })
+                })
+            }
+        },
+        mounted () {
+            this.$store.dispatch('getElements', this.message.id).then((response) => {
+                this.elements = response.data
+            })
         }
     }
 </script>

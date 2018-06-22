@@ -19,7 +19,7 @@ class CreateElementsTable extends Migration
             $table->string('title', 100);
             $table->string('postback', 255);
             $table->string('webview_height_ratio')
-                    ->nullable
+                    ->nullable()
                     ->default(null);
             $table->integer('message_id');
             $table->timestamps();

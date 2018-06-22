@@ -2226,6 +2226,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             elements: { data: [] }
         };
+    },
+    methods: {
+        newButton: function newButton() {
+            var _this = this;
+
+            var data = {
+                type: this.dataToSave.type,
+                title: this.dataToSave.title,
+                postback: this.dataToSave.postback,
+                message_id: this.message.id
+            };
+
+            if (data.type === 'web_url_compact') {
+                data.type = 'web_url';
+                data.webview_height_ratio = 'compact';
+            }
+
+            if (data.type === 'web_url_tall') {
+                data.type = 'web_url';
+                data.webview_height_ratio = 'tall';
+            }
+
+            if (data.type === 'web_url_full') {
+                data.type = 'web_url';
+                data.webview_height_ratio = 'full';
+            }
+
+            this.$store.dispatch('newElement', data).then(function () {
+                _this.dataToSave = { type: '' };
+                _this.$store.dispatch('getElements', _this.message_id).then(function (response) {
+                    _this.elements = response.data;
+                });
+            });
+        },
+        removeButton: function removeButton(id) {
+            var _this2 = this;
+
+            this.$store.dispatch('removeElement', id).then(function () {
+                _this2.$store.dispatch('getElements', _this2.message_id).then(function (response) {
+                    _this2.elements = response.data;
+                });
+            });
+        }
+    },
+    mounted: function mounted() {
+        var _this3 = this;
+
+        this.$store.dispatch('getElements', this.message.id).then(function (response) {
+            _this3.elements = response.data;
+        });
     }
 });
 
@@ -32989,7 +33039,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("strong", [_vm._v("Botões: ")]),
+            _vm._m(0),
             _vm._v(" "),
             _vm._l(_vm.elements.data, function(element) {
               return _c("div", { staticClass: "chip" }, [
@@ -33000,7 +33050,24 @@ var render = function() {
                     _vm._s(element.postback) +
                     "\n            "
                 ),
-                _vm._m(0, true)
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn-floating red",
+                    attrs: { href: "" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.removeButton(element.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("close")
+                    ])
+                  ]
+                )
               ])
             })
           ],
@@ -33008,134 +33075,154 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm._m(1),
+    _vm.elements.data.length === 0
+      ? _c("div", { staticClass: "card red" }, [
+          _c("div", { staticClass: "card-content white-text" }, [
+            _vm._v("\n            Nenhum botão...\n        ")
+          ])
+        ])
+      : _vm._e(),
     _vm._v(" "),
-    _c("form", { staticClass: "grey lighten-4", attrs: { id: "button-add" } }, [
-      _c("strong", [_vm._v("Novo botão:")]),
-      _vm._v(" "),
-      _c("div", {}, [
-        _c(
-          "select",
-          {
+    _c(
+      "form",
+      {
+        staticClass: "grey lighten-4",
+        attrs: { id: "button-add" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.newButton()
+          }
+        }
+      },
+      [
+        _c("strong", [_vm._v("Novo botão:")]),
+        _vm._v(" "),
+        _c("div", {}, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataToSave.type,
+                  expression: "dataToSave.type"
+                }
+              ],
+              staticClass: "browser-default",
+              attrs: { required: "" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.dataToSave,
+                    "type",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c(
+                "option",
+                { attrs: { value: "", disabled: "", selected: "" } },
+                [_vm._v("Escolha o tipo do botão")]
+              ),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "postback" } }, [
+                _vm._v("Postback")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "web_url" } }, [_vm._v("Link")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "web_url_compact" } }, [
+                _vm._v("Web View Compacta")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "web_url_tall" } }, [
+                _vm._v("Web View Alta")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "web_url_full" } }, [
+                _vm._v("Web View Completa")
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-field inline" }, [
+          _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.dataToSave.type,
-                expression: "dataToSave.type"
+                value: _vm.dataToSave.title,
+                expression: "dataToSave.title"
               }
             ],
-            staticClass: "browser-default",
-            attrs: { required: "" },
+            attrs: {
+              type: "text",
+              placeholder: "Título do botão...",
+              required: "",
+              maxlength: "20"
+            },
+            domProps: { value: _vm.dataToSave.title },
             on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.dataToSave,
-                  "type",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.dataToSave, "title", $event.target.value)
               }
             }
-          },
-          [
-            _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
-              _vm._v("Escolha o tipo do botão")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "postback" } }, [
-              _vm._v("Postback")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "web_url" } }, [_vm._v("Link")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "web_url_compact" } }, [
-              _vm._v("Web View Compacta")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "web_url_tall" } }, [
-              _vm._v("Web View Alta")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "web_url_full" } }, [
-              _vm._v("Web View Completa")
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-field inline" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.dataToSave.title,
-              expression: "dataToSave.title"
-            }
-          ],
-          attrs: {
-            type: "text",
-            placeholder: "Título do botão...",
-            required: "",
-            maxlength: "20"
-          },
-          domProps: { value: _vm.dataToSave.title },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.dataToSave, "title", $event.target.value)
-            }
-          }
-        }),
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "active" }, [_vm._v("Título")])
+        ]),
         _vm._v(" "),
-        _c("label", { staticClass: "active" }, [_vm._v("Título")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-field inline" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.dataToSave.postback,
-              expression: "dataToSave.postback"
-            }
-          ],
-          attrs: {
-            type: "text",
-            placeholder: "Qual destino...",
-            required: "",
-            maxlength: "20"
-          },
-          domProps: { value: _vm.dataToSave.postback },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "input-field inline" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.dataToSave.postback,
+                expression: "dataToSave.postback"
               }
-              _vm.$set(_vm.dataToSave, "postback", $event.target.value)
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Qual destino...",
+              required: ""
+            },
+            domProps: { value: _vm.dataToSave.postback },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.dataToSave, "postback", $event.target.value)
+              }
             }
-          }
-        }),
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "active" }, [_vm._v("Destino")])
+        ]),
         _vm._v(" "),
-        _c("label", { staticClass: "active" }, [_vm._v("Destino")])
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "btn",
-        attrs: { id: "elementSaveBtn", type: "submit", value: "+" }
-      })
-    ])
+        _c("input", {
+          staticClass: "btn",
+          attrs: { id: "elementSaveBtn", type: "submit", value: "+" }
+        })
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -33143,19 +33230,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "btn-floating red", attrs: { href: "" } }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("close")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card red" }, [
-      _c("div", { staticClass: "card-content white-text" }, [
-        _vm._v("\n            Nenhum botão...\n        ")
-      ])
-    ])
+    return _c("p", [_c("strong", [_vm._v("Botões: ")])])
   }
 ]
 render._withStripped = true
@@ -49462,13 +49537,59 @@ module.exports = Component.exports
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_postbacks__ = __webpack_require__("./resources/assets/js/states/modules/postbacks.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_messages__ = __webpack_require__("./resources/assets/js/states/modules/messages.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_elements__ = __webpack_require__("./resources/assets/js/states/modules/elements.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     modules: {
         postback: __WEBPACK_IMPORTED_MODULE_0__modules_postbacks__["a" /* default */],
-        message: __WEBPACK_IMPORTED_MODULE_1__modules_messages__["a" /* default */]
+        message: __WEBPACK_IMPORTED_MODULE_1__modules_messages__["a" /* default */],
+        element: __WEBPACK_IMPORTED_MODULE_2__modules_elements__["a" /* default */]
+    }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/states/modules/elements.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: {
+        listElements: { data: [] },
+        element: {}
+    },
+    mutations: {
+        updateElementList: function updateElementList(state, data) {
+            state.listElements = data;
+        },
+        updateElement: function updateElement(state, data) {
+            state.element = data;
+        }
+    },
+    actions: {
+        getElements: function getElements(context, message_id) {
+            return window.axios.get('api/v1/elements?where[message_id=' + message_id).then(function (response) {
+                context.commit('updateElementList', response.data);
+                return response;
+            });
+        },
+        getElement: function getElement(context, id) {
+            return window.axios.get('api/v1/elements/' + id).then(function (response) {
+                context.commit('updateElement', response.data);
+            });
+        },
+        newElement: function newElement(context, data) {
+            return window.axios.post('api/v1/elements', data);
+        },
+        updateElement: function updateElement(context, data) {
+            return window.axios.put('api/v1/elements/' + data.id, data.data);
+        },
+        removeElement: function removeElement(context, id) {
+            return window.axios.delete('api/v1/elements/' + id);
+        }
     }
 });
 
