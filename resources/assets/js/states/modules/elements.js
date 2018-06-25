@@ -13,7 +13,7 @@ export default {
     },
     actions: {
         getElements(context, message_id) {
-            return window.axios.get('api/v1/elements?where[message_id]='+message_id).then(response => {
+            return window.axios.get('api/v1/elements?where[message_id]=' + message_id).then(response => {
                 context.commit('updateElementList', response.data)
                 return response
             })

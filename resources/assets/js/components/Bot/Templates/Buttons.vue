@@ -80,14 +80,14 @@
                 
                 this.$store.dispatch('newElement', data).then(() => {
                     this.dataToSave = { type: '' }
-                    this.$store.dispatch('getElements', this.message_id).then((response) => {
+                    this.$store.dispatch('getElements', this.message.id).then((response) => {
                         this.elements = response.data
                     })
                 })
             },
             removeButton(id) {
                 this.$store.dispatch('removeElement', id).then(() => {
-                    this.$store.dispatch('getElements', this.message_id).then((response) => {
+                    this.$store.dispatch('getElements', this.message.id).then((response) => {
                         this.elements = response.data
                     })
                 })

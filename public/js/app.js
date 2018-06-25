@@ -2270,7 +2270,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.$store.dispatch('newElement', data).then(function () {
                 _this.dataToSave = { type: '' };
-                _this.$store.dispatch('getElements', _this.message_id).then(function (response) {
+                _this.$store.dispatch('getElements', _this.message.id).then(function (response) {
                     _this.elements = response.data;
                 });
             });
@@ -2279,7 +2279,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             this.$store.dispatch('removeElement', id).then(function () {
-                _this2.$store.dispatch('getElements', _this2.message_id).then(function (response) {
+                _this2.$store.dispatch('getElements', _this2.message.id).then(function (response) {
                     _this2.elements = response.data;
                 });
             });
