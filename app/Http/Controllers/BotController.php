@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-SendSuggestions;
-
 use App\BotResources\SendSuggestions;
 use App\Postback;
 use App\Repositories\MessagesBuilderRepository;
