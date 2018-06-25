@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\ApiControllerTrait;
 use App\Http\Controllers\Controller;
 use App\Message;
+use App\Product;
 use Illuminate\Http\Request;
 
 class MessagesController extends Controller
@@ -21,7 +22,7 @@ class MessagesController extends Controller
     
     public function product(Request $request, $id)
     {
-        $product = \App\Product::find($request->input('product_id'));
+        $product = Product::find($request->input('product_id'));
         $message = Message::find($id);
         $message->products()->attach($product);
         
@@ -31,12 +32,12 @@ class MessagesController extends Controller
     public function getProduct($id)
     {
         $message = Message::find($id);        
-        return response()->json($message);
+        return response()->json($message->products);
     }
     
     public function deleteProduct($id, $product_id)
     {
-        $product = \App\Product::find($product_id);
+        $product = Product::find($product_id);
         $message = Message::find($id);
         $message->products()->detach($product);
         

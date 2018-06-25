@@ -30,6 +30,15 @@ export default {
         },
         removeMessage(context, id) {
             return window.axios.delete('api/v1/messages/' + id)
+        },
+        setMessageProduct (context, params){
+            return window.axios.post('api/v1/messages/' + params.id + '/product', { product_id: params.product_id })
+        },
+        getMessageProduct (context, id){
+            return window.axios.get('api/v1/messages/' + id + '/product')
+        },
+        removeMessageProduct (context, params){
+            return window.axios.delete('api/v1/messages/' + params.id + '/product/' + params.product_id)
         }
     }
 }
