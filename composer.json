@@ -10,7 +10,8 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "1.0.19",
-        "schenato/facebook-bot-sdk": "^1.3"
+        "predis/predis": "^1.1",
+        "schenato/facebook-bot-sdk": "^1.4"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
