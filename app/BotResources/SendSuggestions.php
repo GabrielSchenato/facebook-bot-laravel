@@ -38,7 +38,7 @@ class SendSuggestions implements ResourceInterface
 
     public function statusStart(SenderRequest $sender, Bot $bot)
     {
-        (new SuggestionsRepository())->statusStop($sender->getSenderId());
+        (new SuggestionsRepository())->statusStart($sender->getSenderId());
         $bot->message('text', 'Ok, por favor, qual sua sugestão?');
         $bot->message('text', 'Você pode digitar, mas envie a sua sugestão em uma única mensagem!');
     }
