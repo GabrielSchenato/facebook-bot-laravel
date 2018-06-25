@@ -26,7 +26,7 @@ class SuggestionsRepository
 
     public function statusCheck($senderId)
     {
-        Redis::get('suggestion::start::' . $senderId);
+        return Redis::get('suggestion::start::' . $senderId);
     }
 
     public function statusStop($senderId)
