@@ -27,7 +27,7 @@ export default {
             return window.axios.post('api/v1/products', data, {headers: {"content-type": "multipart/form-data"}})
         },
         updateProduct(context, data) {
-            return window.axios.put('api/v1/products/' + data.id, data.data, {headers: {"content-type": "multipart/form-data"}})
+            return window.axios.post('api/v1/products/' + data.id, data.data, {headers: {"content-type": "multipart/form-data"}})
         },
         removeProduct(context, id) {
             return window.axios.delete('api/v1/products/' + id)

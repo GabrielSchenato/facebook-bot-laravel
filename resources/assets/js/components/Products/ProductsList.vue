@@ -15,8 +15,8 @@
                         <p><a :href="product.url" target="_blank" title="ver página do produto">{{ product.url }}</a></p>
                     </div>
                     <div class="card-action">
-                        <a :href="'#/produtos/' + product.id + '/editar'">Editar</a>
-                        <a :href="'#/produtos/' + product.id + '/remover'">Remover</a>
+                        <a :href="'#/product/' + product.id + '/edit'">Editar</a>
+                        <a :href="'#/product/' + product.id + '/remove'">Remover</a>
                     </div>
                 </div>
             </div>
