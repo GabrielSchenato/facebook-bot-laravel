@@ -49,7 +49,7 @@ class MessagesBuilderRepository
     {
         $products = [];
 
-        foreach ($message->$products as $product) {
+        foreach ($message->products as $product) {
             $default_action = new Button('web_url', null, $product->url);
             $products[] = new Product($product->title, $product->image_full_url, $product->subtitle, $default_action);
         }
