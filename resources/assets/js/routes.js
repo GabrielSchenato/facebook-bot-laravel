@@ -13,6 +13,8 @@ import MenuView from './components/Menus/MenuView'
 
 import SuggestionsList from './components/Suggestions/SuggestionsList'
 
+import NotFoundPage from './components/NotFoundPage'
+
 export default [
     { path: '/', component: Postback, meta: { requiresAuth: true } },
     
@@ -28,5 +30,7 @@ export default [
     { path: '/menus', component: Menu, meta: { requiresAuth: true } },
     { path: '/menu/:id', component: MenuView, meta: { requiresAuth: true } },
     
-    { path: '/suggestions', component: SuggestionsList, meta: { requiresAuth: true } }
+    { path: '/suggestions', component: SuggestionsList, meta: { requiresAuth: true } },
+    
+    { path: '*', component: NotFoundPage, meta: { requiresAuth: false } },
 ]
