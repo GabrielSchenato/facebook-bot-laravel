@@ -29,19 +29,6 @@
             </div>
         </nav>
         
-        <ul id="slide-out" class="side-nav">
-            <li>
-                <div class="userView">
-                    <div class="background">
-                        <img src="img/leaf_background.jpg" alt="">
-                    </div>
-                    <a><img class="circle" src="https://secure.gravatar.com/avatar/4b0f5245bbffa6fde78b6d62b80923f7" alt=""></a>
-                    <a><span class="white-text name">Gabriel Schenato</span></a>
-                    <a href="https://github.com/schenato"><span class="white-text email">@schenato</span></a>
-                </div>
-            </li>
-        </ul>
-        
         <div id="app">
             <div class="preloader-container">
                 <div class="preloader-wrapper big active">
@@ -57,12 +44,6 @@
                 </div>
             </div>
         </div>
-
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        <script type="text/javascript">
-            $('#nav-mobile').sideNav();
-        </script>
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>
