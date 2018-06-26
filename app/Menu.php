@@ -11,7 +11,7 @@ class Menu extends Model
 
     public function menu_buttons()
     {
-        $this->hasMany(MenuButton::class);
+        return $this->hasMany(MenuButton::class);
     }
 
 }

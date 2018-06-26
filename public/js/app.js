@@ -2394,6 +2394,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__("./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
 //
 //
 //
@@ -2437,12 +2439,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             locale: 'default',
             composer_input_disabled: true
         };
+    },
+    methods: {
+        save: function save() {
+            var _this = this;
+
+            var data = {
+                locale: this.locale,
+                composer_input_disabled: this.composer_input_disabled
+            };
+
+            this.$store.dispatch('newMenu', data).then(function () {
+                _this.$store.dispatch('getMenus');
+                _this.locale = 'default';
+                _this.composer_input_disabled = true;
+            });
+        },
+        removeMenu: function removeMenu() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
+                title: "Removendo TODOS os menus no Facebook!!!",
+                text: "Você está removendo os menus cadastrados no Facebook, você terá que sincronizar um por um novamente!",
+                icon: "warning",
+                buttons: ["Cancelar!", "Deletar!"],
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    _this2.$store.dispatch('removeFromFacebook').then(function (res) {
+                        __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Removido!", "Removido com sucesso", "success");
+                        _this2.$store.dispatch('getMenus');
+                    });
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Seu menu está salvo!", { timer: 1000 });
+                }
+            });
+        }
     },
     computed: {
         menus: function menus() {
@@ -34091,14 +34130,16 @@ var render = function() {
       [_vm._v("Limpar menu no Facebook")]
     ),
     _vm._v(" "),
-    _vm.menus.data.lenght > 0
+    _vm.menus.data.length > 0
       ? _c(
           "div",
+          { staticClass: "margin-botton" },
           _vm._l(_vm.menus.data, function(menu) {
             return _c(
               "router-link",
               {
-                staticClass: "waves-effect waves-light btn-large light-green",
+                staticClass:
+                  "waves-effect waves-light btn-large light-green margin-botton",
                 attrs: { to: { path: "menu/" + menu.id } }
               },
               [
@@ -34117,7 +34158,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.menus.data.lenght === 0
+    _vm.menus.data.length === 0
       ? _c("div", { staticClass: "card red" }, [
           _c("div", { staticClass: "card-content white-text" }, [
             _vm._v("\n            Nenhum menu cadastrado...\n        ")
@@ -34136,9 +34177,9 @@ var render = function() {
         }
       },
       [
+        _c("legend", [_vm._v("Novo menu")]),
+        _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("legend", [_vm._v("Novo menu")]),
-          _vm._v(" "),
           _c("div", { staticClass: "input-group col s6" }, [
             _c("input", {
               directives: [
