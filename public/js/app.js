@@ -2500,6 +2500,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__("./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
 //
 //
 //
@@ -2568,6 +2570,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
@@ -2576,6 +2579,76 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 parent_id: ""
             }
         };
+    },
+    methods: {
+        create: function create() {
+            var _this = this;
+
+            var data = {
+                type: this.newButton.type,
+                title: this.newButton.title,
+                menu_id: this.$route.params.id,
+                parent_id: this.newButton.parent_id
+            };
+
+            if (this.newButton.value) {
+                data.value = this.newButton.value;
+            }
+            if (!data.parent_id) {
+                data.parent_id = 0;
+            }
+
+            this.$store.dispatch('newMenuButton', data).then(function () {
+                var params = {
+                    id: _this.$route.params.id,
+                    data: {
+                        facebook_diff: true
+                    }
+                };
+                _this.$store.dispatch('updateMenu', params).then(function () {
+                    _this.$store.dispatch('getMenu', _this.$route.params.id);
+                });
+            });
+        },
+
+        remove: function remove() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
+                title: "Removendo!!!",
+                text: "Você está removendo este menu e não poderá desafazer esta ação!",
+                icon: "warning",
+                buttons: ["Cancelar!", "Deletar!"],
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    _this2.$store.dispatch('removeMenu', _this2.$route.params.id).then(function (res) {
+                        __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Removido!", "Removido com sucesso", "success");
+                        _this2.$router.push('/menus');
+                    });
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Seu menu está salvo!", { timer: 1000 });
+                }
+            });
+        },
+        sendToFacebook: function sendToFacebook() {
+            this.$store.dispatch('sendToFacebook', this.$route.params.id).then(function () {
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Sincronizado!", "O menu foi enviado para o Facebook.", "success");
+            });
+        }
+    },
+    filters: {
+        menus_types: function menus_types(value) {
+            if (value === 'nested') {
+                return 'Aninhado';
+            }
+            if (value === 'postback') {
+                return 'Postback';
+            }
+            if (value === 'web_url') {
+                return 'Link';
+            }
+        }
     },
     computed: {
         menu: function menu() {
@@ -34946,6 +35019,7 @@ var render = function() {
             return menu_buttons.parent_id == 0
               ? _c(
                   "div",
+                  { staticStyle: { "margin-bottom": "10px" } },
                   [
                     _c(
                       "div",
@@ -51815,6 +51889,8 @@ module.exports = Component.exports
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_elements__ = __webpack_require__("./resources/assets/js/states/modules/elements.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_products__ = __webpack_require__("./resources/assets/js/states/modules/products.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_menus__ = __webpack_require__("./resources/assets/js/states/modules/menus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_menuButtons__ = __webpack_require__("./resources/assets/js/states/modules/menuButtons.js");
+
 
 
 
@@ -51827,7 +51903,8 @@ module.exports = Component.exports
         message: __WEBPACK_IMPORTED_MODULE_1__modules_messages__["a" /* default */],
         element: __WEBPACK_IMPORTED_MODULE_2__modules_elements__["a" /* default */],
         product: __WEBPACK_IMPORTED_MODULE_3__modules_products__["a" /* default */],
-        menu: __WEBPACK_IMPORTED_MODULE_4__modules_menus__["a" /* default */]
+        menu: __WEBPACK_IMPORTED_MODULE_4__modules_menus__["a" /* default */],
+        menuButton: __WEBPACK_IMPORTED_MODULE_5__modules_menuButtons__["a" /* default */]
     }
 });
 
@@ -51870,6 +51947,48 @@ module.exports = Component.exports
         },
         removeElement: function removeElement(context, id) {
             return window.axios.delete('api/v1/elements/' + id);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/states/modules/menuButtons.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: {
+        listMenuButtons: { data: [] },
+        menu_button: {}
+    },
+    mutations: {
+        updateMenuButtonList: function updateMenuButtonList(state, data) {
+            state.listMenuButtons = data;
+        },
+        updateMenuButton: function updateMenuButton(state, data) {
+            state.menu_button = data;
+        }
+    },
+    actions: {
+        getMenuButtons: function getMenuButtons(context) {
+            return window.axios.get('api/v1/menu-buttons').then(function (response) {
+                context.commit('updateMenuButtonList', response.data);
+            });
+        },
+        getMenuButton: function getMenuButton(context, id) {
+            return window.axios.get('api/v1/menu-buttons/' + id).then(function (response) {
+                context.commit('updateMenuButton', response.data);
+            });
+        },
+        newMenuButton: function newMenuButton(context, data) {
+            return window.axios.post('api/v1/menu-buttons', data);
+        },
+        updateMenuButton: function updateMenuButton(context, data) {
+            return window.axios.put('api/v1/menu-buttons/' + data.id, data.data);
+        },
+        removeMenuButton: function removeMenuButton(context, id) {
+            return window.axios.delete('api/v1/menu-buttons/' + id);
         }
     }
 });
