@@ -2534,8 +2534,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            newButton: {
+                type: "",
+                parent_id: ""
+            }
+        };
+    },
     computed: {
         menu: function menu() {
             var menu = this.$store.state.menu.menu;
@@ -2921,7 +2962,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.child.btn-large{\n  margin-left: 30px;\n}\n", ""]);
+exports.push([module.i, "\n#addButton{\n  margin-top: 40px;\n  padding: 10px;\n  border-radius: 2px;\n}\n.child.btn-large{\n  margin-left: 30px;\n}\n", ""]);
 
 // exports
 
@@ -34970,7 +35011,210 @@ var render = function() {
             _vm._v("\n            Nenhum botão cadastrado...\n        ")
           ])
         ])
-      : _vm._e()
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        staticClass: "grey lighten-5",
+        attrs: { id: "addButton" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.create()
+          }
+        }
+      },
+      [
+        _c("strong", [_vm._v("Novo botão:")]),
+        _vm._v(" "),
+        _c("div", {}, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newButton.type,
+                  expression: "newButton.type"
+                }
+              ],
+              staticClass: "browser-default",
+              attrs: { required: "" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.newButton,
+                    "type",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "", disabled: "" } }, [
+                _vm._v("Tipo do botão")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "nested" } }, [
+                _vm._v("Aninhado")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "postback" } }, [
+                _vm._v("Postback")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "web_url" } }, [_vm._v("Link")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-field inline" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newButton.title,
+                expression: "newButton.title"
+              }
+            ],
+            attrs: { type: "text", required: "", maxlength: "20" },
+            domProps: { value: _vm.newButton.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.newButton, "title", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "active" }, [_vm._v("Título")])
+        ]),
+        _vm._v(" "),
+        _vm.newButton.type === "postback"
+          ? _c("div", { staticClass: "input-field inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newButton.value,
+                    expression: "newButton.value"
+                  }
+                ],
+                attrs: { type: "text", required: "", maxlength: "20" },
+                domProps: { value: _vm.newButton.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.newButton, "value", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "active" }, [
+                _vm._v("Postback destino")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.newButton.type === "web_url"
+          ? _c("div", { staticClass: "input-field inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newButton.value,
+                    expression: "newButton.value"
+                  }
+                ],
+                attrs: { type: "text", required: "" },
+                domProps: { value: _vm.newButton.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.newButton, "value", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "active" }, [_vm._v("Link")])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", {}, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newButton.parent_id,
+                  expression: "newButton.parent_id"
+                }
+              ],
+              staticClass: "browser-default",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.newButton,
+                    "parent_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "", disabled: "" } }, [
+                _vm._v("Botão pai")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Nenhum")]),
+              _vm._v(" "),
+              _vm._l(_vm.menu.menu_buttons, function(menu_buttons) {
+                return _c("option", { domProps: { value: menu_buttons.id } }, [
+                  _vm._v(_vm._s(menu_buttons.title))
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "btn",
+          attrs: { type: "submit", value: "+" }
+        })
+      ]
+    )
   ])
 }
 var staticRenderFns = []
