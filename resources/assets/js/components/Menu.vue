@@ -49,11 +49,19 @@
             logout() {
                 window.axios.post('/logout')
                     .then((res) => {
-                            swal('Deslogado com sucesso', 'Redirecionado para o painel de login', 'success', {timer: 2500})
+                        if (res.data.status === 'success') {
+                            swal('Deslogado com sucesso', 'Redirecionando para o painel de login', 'success', {timer: 2000})
                             this.$router.push({
-                                path: '#/login'
+                                path: '/login'
                             })
-                        })
+
+                        } else {
+                            swal('Falha ao deslogar!', 'Tente novamente!', 'error')
+                        }
+                    })
+                    .catch(() => {
+                        swal('Falha ao deslogar!', 'Infelizmente isso não foi possível ):', 'error')
+                    })
             }
         }
     }

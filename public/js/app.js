@@ -2499,10 +2499,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             window.axios.post('/logout').then(function (res) {
-                swal('Deslogado com sucesso', 'Redirecionado para o painel de login', 'success', { timer: 2500 });
-                _this.$router.push({
-                    path: '#/login'
-                });
+                if (res.data.status === 'success') {
+                    swal('Deslogado com sucesso', 'Redirecionando para o painel de login', 'success', { timer: 2000 });
+                    _this.$router.push({
+                        path: '/login'
+                    });
+                } else {
+                    swal('Falha ao deslogar!', 'Tente novamente!', 'error');
+                }
+            }).catch(function () {
+                swal('Falha ao deslogar!', 'Infelizmente isso não foi possível ):', 'error');
             });
         }
     }
