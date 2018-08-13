@@ -2504,6 +2504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.$router.push({
                         path: '/login'
                     });
+                    _this.$store.dispatch('getCurrentUser');
                 } else {
                     swal('Falha ao deslogar!', 'Tente novamente!', 'error');
                 }

@@ -54,6 +54,7 @@
                             this.$router.push({
                                 path: '/login'
                             })
+                            this.$store.dispatch('getCurrentUser')
 
                         } else {
                             swal('Falha ao deslogar!', 'Tente novamente!', 'error')
