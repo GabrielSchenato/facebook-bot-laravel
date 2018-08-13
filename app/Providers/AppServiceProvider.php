@@ -8,6 +8,7 @@ use App\Observers\ProductObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap any application services.
      *
@@ -27,4 +28,5 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
 }

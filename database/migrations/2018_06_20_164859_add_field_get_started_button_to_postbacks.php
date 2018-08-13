@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddFieldGetStartedButtonToPostbacks extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -28,4 +29,5 @@ class AddFieldGetStartedButtonToPostbacks extends Migration
     {
         Schema::dropColumn('get_started');
     }
+
 }

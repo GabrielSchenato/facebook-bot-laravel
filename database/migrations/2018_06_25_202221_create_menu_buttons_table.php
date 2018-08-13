@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateMenuButtonsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -32,4 +33,5 @@ class CreateMenuButtonsTable extends Migration
     {
         Schema::dropIfExists('menu_buttons');
     }
+
 }

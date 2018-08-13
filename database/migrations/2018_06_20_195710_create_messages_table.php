@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateMessagesTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -32,4 +33,5 @@ class CreateMessagesTable extends Migration
     {
         Schema::dropIfExists('messages');
     }
+
 }

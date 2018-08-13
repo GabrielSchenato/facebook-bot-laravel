@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProductsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -21,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('url', 250);
             $table->timestamps();
         });
-        
+
         Schema::create('message_product', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('message_id');
@@ -39,4 +40,5 @@ class CreateProductsTable extends Migration
         Schema::dropIfExists('products');
         Schema::dropIfExists('message_product');
     }
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePostbacksTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -29,4 +30,5 @@ class CreatePostbacksTable extends Migration
     {
         Schema::dropIfExists('postbacks');
     }
+
 }

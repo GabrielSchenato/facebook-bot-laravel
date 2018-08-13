@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateElementsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -35,4 +36,5 @@ class CreateElementsTable extends Migration
     {
         Schema::dropIfExists('elements');
     }
+
 }

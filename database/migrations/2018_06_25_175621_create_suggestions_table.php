@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSuggestionsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -18,7 +19,7 @@ class CreateSuggestionsTable extends Migration
             $table->string('user_face_id');
             $table->string('suggestion');
             $table->boolean('readed')
-                    ->default(true);            
+                    ->default(true);
             $table->timestamps();
         });
     }
@@ -32,4 +33,5 @@ class CreateSuggestionsTable extends Migration
     {
         Schema::dropIfExists('suggestions');
     }
+
 }
