@@ -26,6 +26,7 @@
                         </div>
 
                         <button class="btn" type="submit">Cadastrar</button>
+                        <a href="#/" class="btn green waves-effect waves-light">Voltar <i class="material-icons right">arrow_back</i></a>
                     </form>                    
                 </div>
             </div>            

@@ -1674,6 +1674,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1711,6 +1712,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__("./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
+//
 //
 //
 //
@@ -2468,6 +2470,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     computed: {
@@ -2480,6 +2492,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             menuWidth: 300,
             closeOnClick: true
         });
+    },
+
+    methods: {
+        logout: function logout() {
+            var _this = this;
+
+            window.axios.post('/logout').then(function (res) {
+                swal('Deslogado com sucesso', 'Redirecionado para o painel de login', 'success', { timer: 2500 });
+                _this.$router.push({
+                    path: '#/login'
+                });
+            });
+        }
     }
 });
 
@@ -47050,7 +47075,9 @@ var render = function() {
               _vm._v(" "),
               _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
                 _vm._v("Cadastrar")
-              ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
             ]
           )
         ])
@@ -47058,7 +47085,24 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn green waves-effect waves-light",
+        attrs: { href: "#/" }
+      },
+      [
+        _vm._v("Voltar "),
+        _c("i", { staticClass: "material-icons right" }, [_vm._v("arrow_back")])
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47511,18 +47555,9 @@ var render = function() {
               _vm._v(" "),
               _c("hr"),
               _vm._v(" "),
-              _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
-                _vm._v("Login")
-              ]),
+              _vm._m(0),
               _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "btn green right",
-                  attrs: { href: "#/register" }
-                },
-                [_vm._v("Cadastre-se")]
-              )
+              _vm._m(1)
             ]
           )
         ])
@@ -47530,7 +47565,42 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn waves-effect waves-light",
+        attrs: { type: "submit", name: "action" }
+      },
+      [
+        _vm._v("Login\n                        "),
+        _c("i", { staticClass: "material-icons right" }, [
+          _vm._v("exit_to_app")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn green waves-effect waves-light",
+        attrs: { href: "#/register" }
+      },
+      [
+        _vm._v("Cadastre-se "),
+        _c("i", { staticClass: "material-icons right" }, [_vm._v("person_add")])
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -48196,41 +48266,98 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("ul", { staticClass: "side-nav", attrs: { id: "slide-out" } }, [
-    _c("li", [
-      _c("div", { staticClass: "userView" }, [
+  return _c("div", [
+    _c("nav", { staticClass: "nav-extended" }, [
+      _c("div", { staticClass: "nav-wrapper container-fluid grey darken-4" }, [
         _vm._m(0),
         _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("a", [
-          _c("span", { staticClass: "white-text name" }, [
-            _vm._v(_vm._s(_vm.user.name))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("a", { attrs: { href: "mailto:" + _vm.user.email } }, [
-          _c("span", { staticClass: "white-text email" }, [
-            _vm._v(_vm._s(_vm.user.email))
-          ])
-        ])
+        _c(
+          "a",
+          {
+            staticClass: "sidenav-trigger",
+            attrs: {
+              href: "#",
+              id: "nav-mobile",
+              "data-activates": "slide-out"
+            }
+          },
+          [
+            _vm.user.id != undefined
+              ? _c("i", { staticClass: "material-icons" }, [_vm._v("menu")])
+              : _vm._e()
+          ]
+        )
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2),
-    _vm._v(" "),
-    _vm._m(3),
-    _vm._v(" "),
-    _vm._m(4),
-    _vm._v(" "),
-    _vm._m(5),
-    _vm._v(" "),
-    _vm._m(6),
-    _vm._v(" "),
-    _vm._m(7)
+    _c("ul", { staticClass: "side-nav", attrs: { id: "slide-out" } }, [
+      _c("li", [
+        _c("div", { staticClass: "userView" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c("a", [
+            _c("span", { staticClass: "white-text name" }, [
+              _vm._v(_vm._s(_vm.user.name))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "mailto:" + _vm.user.email } }, [
+            _c("span", { staticClass: "white-text email" }, [
+              _vm._v(_vm._s(_vm.user.email))
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
+      _vm._m(4),
+      _vm._v(" "),
+      _vm._m(5),
+      _vm._v(" "),
+      _vm._m(6),
+      _vm._v(" "),
+      _vm._m(7),
+      _vm._v(" "),
+      _vm._m(8),
+      _vm._v(" "),
+      _vm._m(9),
+      _vm._v(" "),
+      _c("li", [
+        _c(
+          "a",
+          {
+            staticClass: "waves-effect",
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.logout()
+              }
+            }
+          },
+          [_vm._v("Logout")]
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "brand-logo center", attrs: { href: "#/" } },
+      [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("chat")]),
+        _vm._v(" ChatBot")
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -48314,6 +48441,16 @@ var staticRenderFns = [
         { staticClass: "waves-effect", attrs: { href: "#/suggestions" } },
         [_vm._v("Sugestões")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { staticClass: "subheader", attrs: { href: "" } }, [
+        _vm._v("Sistema")
+      ])
     ])
   }
 ]
@@ -64258,14 +64395,22 @@ router.beforeEach(function (to, from, next) {
     }
     return next();
 });
-
+var menu = new Vue({
+    el: '#menu',
+    components: {
+        meuMenu: __WEBPACK_IMPORTED_MODULE_5__components_Menu___default.a
+    },
+    template: '<div><meu-menu></meu-menu></div>',
+    router: router,
+    store: store
+});
 var app = new Vue({
     el: '#app',
     components: {
         loader: __WEBPACK_IMPORTED_MODULE_4__components_Loader___default.a,
         meuMenu: __WEBPACK_IMPORTED_MODULE_5__components_Menu___default.a
     },
-    template: '<div><router-view class="container"></router-view><loader></loader><meu-menu></meu-menu></div>',
+    template: '<div><router-view class="container"></router-view><loader></loader></div>',
     router: router,
     store: store
 });

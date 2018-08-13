@@ -21,10 +21,11 @@
                         </div>
 
                         <hr>
-
-                        <button class="btn" type="submit">Login</button>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                            <i class="material-icons right">exit_to_app</i>
+                        </button>
                         
-                        <a href="#/register" class="btn green right">Cadastre-se</a>
+                        <a href="#/register" class="btn green waves-effect waves-light">Cadastre-se <i class="material-icons right">person_add</i></a>
                     </form>                    
                 </div>
             </div>            

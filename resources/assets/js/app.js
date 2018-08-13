@@ -31,14 +31,23 @@ router.beforeEach((to, from, next) => {
   }
   return next();
 });
-
+const menu = new Vue({
+    el: '#menu',
+    components: {
+        meuMenu: Menu
+    },
+    template: `<div><meu-menu></meu-menu></div>`,
+    router,
+    store
+});
 const app = new Vue({
     el: '#app',
     components: {
         loader: Loader,
         meuMenu: Menu
     },
-    template: `<div><router-view class="container"></router-view><loader></loader><meu-menu></meu-menu></div>`,
+    template: `<div><router-view class="container"></router-view><loader></loader></div>`,
     router,
     store
 });
+

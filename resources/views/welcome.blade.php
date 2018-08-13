@@ -11,23 +11,8 @@
 
     </head>
     <body class="blue-grey lighten-5">
-        <nav id="main-nav">
-            <div class="nav-wrapper container-fluid grey darken-4">
-                <div class="row">
-                    <div class="col s12">
-                        <a href="#/" class="brand-logo"><i class="material-icons">chat</i> ChatBot</a>
-
-                        <ul class="right hide-on-med-and-down">
-                            <li>
-                                <a id="nav-mobile" href="#" data-activates="slide-out" class="menu">
-                                    <i class="material-icons">menu</i>
-                                </a> 
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <div id="menu">            
+        </div>
 
         <div id="app">
             <div class="preloader-container">
