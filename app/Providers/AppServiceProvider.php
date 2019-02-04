@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Providers;
+namespace FacebookBot\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Product;
-use App\Observers\ProductObserver;
+use FacebookBot\Product;
+use FacebookBot\Observers\ProductObserver;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Observers;
+namespace FacebookBot\Observers;
 
-use App\Product;
+use FacebookBot\Product;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 

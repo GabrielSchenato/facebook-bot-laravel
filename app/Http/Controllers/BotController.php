@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace FacebookBot\Http\Controllers;
 
-use App\BotResources\SendSuggestions;
-use App\Postback;
-use App\Repositories\MessagesBuilderRepository;
+use FacebookBot\BotResources\SendSuggestions;
+use FacebookBot\Postback;
+use FacebookBot\Repositories\MessagesBuilderRepository;
 use CodeBot\Build\Solid;
 use CodeBot\Resources\Resolver;
 use CodeBot\SenderRequest;

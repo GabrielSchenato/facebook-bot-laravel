@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace FacebookBot\Http\Controllers;
 
-use App\Http\Requests\RegisterFormRequest;
-use App\User;
+use FacebookBot\Http\Requests\RegisterFormRequest;
+use FacebookBot\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;

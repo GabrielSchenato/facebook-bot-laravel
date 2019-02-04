@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace FacebookBot\Repositories;
 
-use App\Suggestion;
+use FacebookBot\Suggestion;
 use Illuminate\Support\Facades\Redis;
 
 /*

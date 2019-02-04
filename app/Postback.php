@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace FacebookBot;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Postback extends Model
 
     public function messages()
     {
-        return $this->hasMany('App\Message');
+        return $this->hasMany('FacebookBot\Message');
     }
 
 }

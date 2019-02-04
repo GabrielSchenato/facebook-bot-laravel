@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace FacebookBot\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\ApiControllerTrait;
-use App\Http\Controllers\Controller;
-use App\Suggestion;
+use FacebookBot\Http\Controllers\ApiControllerTrait;
+use FacebookBot\Http\Controllers\Controller;
+use FacebookBot\Suggestion;
 
 class SuggestionsController extends Controller
 {

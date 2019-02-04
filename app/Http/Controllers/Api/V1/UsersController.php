@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace FacebookBot\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
-use App\User;
+use FacebookBot\Http\Controllers\Controller;
+use FacebookBot\User;
 
 class UsersController extends Controller
 {

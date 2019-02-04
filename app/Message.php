@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace FacebookBot;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,12 +13,12 @@ class Message extends Model
 
     public function elements()
     {
-        return $this->hasMany('App\Element');
+        return $this->hasMany('FacebookBot\Element');
     }
 
     public function products()
     {
-        return $this->belongsToMany('App\Product');
+        return $this->belongsToMany('FacebookBot\Product');
     }
 
 }

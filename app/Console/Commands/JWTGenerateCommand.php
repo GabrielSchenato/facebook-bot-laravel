@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace FacebookBot\Console\Commands;
 
 use \Tymon\JWTAuth\Commands\JWTGenerateCommand as Command;
 
@@ -10,7 +10,7 @@ use \Tymon\JWTAuth\Commands\JWTGenerateCommand as Command;
  *
  * Class JWTGenerateCommand
  * @author David Pereira
- * @package App\Console\Commands
+ * @package FacebookBot\Console\Commands
  */
 class JWTGenerateCommand extends Command
 {

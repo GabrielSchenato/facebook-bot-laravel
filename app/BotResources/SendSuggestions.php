@@ -1,8 +1,8 @@
 <?php
 
-namespace App\BotResources;
+namespace FacebookBot\BotResources;
 
-use App\Repositories\SuggestionsRepository;
+use FacebookBot\Repositories\SuggestionsRepository;
 use CodeBot\Bot;
 use CodeBot\Resources\ResourceInterface;
 use CodeBot\SenderRequest;

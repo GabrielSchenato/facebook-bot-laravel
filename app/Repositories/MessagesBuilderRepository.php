@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace FacebookBot\Repositories;
 
-use App\Message;
+use FacebookBot\Message;
 use CodeBot\Bot;
 use CodeBot\Element\Button;
 use CodeBot\Element\Product;
