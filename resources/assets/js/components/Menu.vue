@@ -3,7 +3,7 @@
         <nav class="nav-extended">
             <div class="nav-wrapper container-fluid grey darken-4">
                 <a href="#/" class="brand-logo center"><i class="material-icons">chat</i> ChatBot</a>
-                <a href="#" id="nav-mobile" data-activates="slide-out" class="sidenav-trigger"><i v-if="user.id != undefined" class="material-icons">menu</i></a>
+                <a href="#" id="nav-mobile" data-activates="slide-out" class="sidenav-trigger"><i v-if="$auth.user().id != undefined" class="material-icons">menu</i></a>
             </div>
         </nav>
         <ul id="slide-out" class="side-nav">
@@ -27,7 +27,7 @@
             <li><a href="#/suggestions" class="waves-effect">Sugestões</a></li>
 
             <li><a href="" class="subheader">Sistema</a></li>
-            <li><a href="#" @click.prevent="logout()" class="waves-effect">Logout</a></li>
+            <li v-if="$auth.check()"><a href="#" @click.prevent="$auth.logout()" class="waves-effect">Logout</a></li>
         </ul>
     </div>
 </template>
@@ -46,24 +46,7 @@
             });
         },
         methods: {
-            logout() {
-                window.axios.post('/logout')
-                    .then((res) => {
-                        if (res.data.status === 'success') {
-                            swal('Deslogado com sucesso', 'Redirecionando para o painel de login', 'success', {timer: 2000})
-                            this.$router.push({
-                                path: '/login'
-                            })
-                            this.$store.dispatch('getCurrentUser')
-
-                        } else {
-                            swal('Falha ao deslogar!', 'Tente novamente!', 'error')
-                        }
-                    })
-                    .catch(() => {
-                        swal('Falha ao deslogar!', 'Infelizmente isso não foi possível ):', 'error')
-                    })
-            }
+            
         }
     }
 </script>

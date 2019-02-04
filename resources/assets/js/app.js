@@ -5,32 +5,30 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import VuexStore from './states';
+import VueAxios from 'vue-axios';
+import VueAuth from '@websanova/vue-auth';
+import auth from './auth';
+import axios from 'axios';
 import routes from './routes';
 import Loader from './components/Loader';
 import Menu from './components/Menu';
 
 Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
 Vue.use(Vuex);
+
+axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
 
 const router = new VueRouter({
     routes
 });
 
-const store = new Vuex.Store(VuexStore)
+Vue.router = router;
 
-router.beforeEach((to, from, next) => {
-  let requiresAuth = to.meta.requiresAuth || false; 
-  
-  if(requiresAuth){
-        return store.dispatch('getCurrentUser').then((res) => {
-            if(res.data.id === undefined) {
-                return next ({path: 'login'});
-            }
-            return next();
-        });
-  }
-  return next();
-});
+const store = new Vuex.Store(VuexStore);
+
+Vue.use(VueAuth, auth);
+
 const menu = new Vue({
     el: '#menu',
     components: {

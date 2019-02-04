@@ -13,29 +13,29 @@ export default {
     },
     actions: {
         getPostbacks(context) {
-            return window.axios.get('api/v1/postbacks').then(response => {
+            return window.axios.get('postbacks').then(response => {
                 context.commit('updatePostbackList', response.data)
             })
         },
         getPostback(context, id) {
-            return window.axios.get('api/v1/postbacks/' + id).then(response => {
+            return window.axios.get('postbacks/' + id).then(response => {
                 context.commit('updatePostback', response.data)
             })
         },
         newPostback(context, data) {
-            return window.axios.post('api/v1/postbacks', data)
+            return window.axios.post('postbacks', data)
         },
         updatePostback(context, data) {
-            return window.axios.put('api/v1/postbacks/' + data.id, data.data)
+            return window.axios.put('postbacks/' + data.id, data.data)
         },
         removePostback(context, id) {
-            return window.axios.delete('api/v1/postbacks/' + id)
+            return window.axios.delete('postbacks/' + id)
         },
         addGetStarted(context, id) {
-            return window.axios.post('api/v1/postbacks/get-started-button/' + id)
+            return window.axios.post('postbacks/get-started-button/' + id)
         },
         removeGetStarted(context) {
-            return window.axios.delete('api/v1/postbacks/get-started-button')
+            return window.axios.delete('postbacks/get-started-button')
         }
     }
 }

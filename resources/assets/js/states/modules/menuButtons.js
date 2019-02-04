@@ -13,23 +13,23 @@ export default {
     },
     actions: {
         getMenuButtons(context) {
-            return window.axios.get('api/v1/menu-buttons').then(response => {
+            return window.axios.get('menu-buttons').then(response => {
                 context.commit('updateMenuButtonList', response.data)
             })
         },
         getMenuButton(context, id) {
-            return window.axios.get('api/v1/menu-buttons/' + id).then(response => {
+            return window.axios.get('menu-buttons/' + id).then(response => {
                 context.commit('updateMenuButton', response.data)
             })
         },
         newMenuButton(context, data) {
-            return window.axios.post('api/v1/menu-buttons', data)
+            return window.axios.post('menu-buttons', data)
         },
         updateMenuButton(context, data) {
-            return window.axios.put('api/v1/menu-buttons/' + data.id, data.data)
+            return window.axios.put('menu-buttons/' + data.id, data.data)
         },
         removeMenuButton(context, id) {
-            return window.axios.delete('api/v1/menu-buttons/' + id)
+            return window.axios.delete('menu-buttons/' + id)
         }
     }
 }

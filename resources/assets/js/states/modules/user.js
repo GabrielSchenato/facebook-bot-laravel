@@ -9,7 +9,7 @@ export default {
     },
     actions: {
         getCurrentUser(context) {
-            return window.axios.get('/api/v1/users/me').then((response) => {
+            return window.axios.get('/users/me').then((response) => {
                 context.commit('updateUser', response.data)
                 return response
             })

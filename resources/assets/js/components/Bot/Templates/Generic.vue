@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="products.length > 0">
-            <div v-for="product in products" class="chip">
+            <div v-for="product in products" class="chip" v-bind:key="product.id">
                 {{ product.title }}
                 <a class="btn-floating red" @click.prevent="removeProduct(product.id)">
                     <i class="material-icons">close</i>
@@ -20,7 +20,7 @@
             <div class="">
                 <select class="browser-default" v-model="newProductData">
                     <option value="" disabled="" selected="">Escolha um produto</option>
-                    <option v-for="product in productsList.data" :value="product">{{ product.title }}</option>
+                    <option v-for="product in productsList.data" :value="product" v-bind:key="product.id">{{ product.title }}</option>
                 </select>
             </div>
             <input id="elementSaveBtn" type="submit" value="+" class="btn">

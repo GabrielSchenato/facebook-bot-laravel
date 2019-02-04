@@ -2,9 +2,9 @@
     <div>
         <div v-if="elements.data.length > 0">
             <p><strong>Botões: </strong></p>
-            <div v-for="element in elements.data" class="chip">
+            <div v-for="element in elements.data" class="chip" v-bind:key="element.id">
                 {{ element.title }} - postback: {{ element.postback }}
-                <a href="" class="btn-floating red" @click.prevent="removeButton(element.id)"><i class="material-icons">close</i></a>
+                <a href=""  class="btn-floating red" @click.prevent="removeButton(element.id)"><i class="material-icons">close</i></a>
             </div>
         </div>
 

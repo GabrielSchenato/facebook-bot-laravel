@@ -13,29 +13,29 @@ export default {
     },
     actions: {
         getMenus(context) {
-            return window.axios.get('api/v1/menus').then(response => {
+            return window.axios.get('menus').then(response => {
                 context.commit('updateMenuList', response.data)
             })
         },
         getMenu(context, id) {
-            return window.axios.get('api/v1/menus/' + id).then(response => {
+            return window.axios.get('menus/' + id).then(response => {
                 context.commit('updateMenu', response.data)
             })
         },
         newMenu(context, data) {
-            return window.axios.post('api/v1/menus', data)
+            return window.axios.post('menus', data)
         },
         updateMenu(context, data) {
-            return window.axios.put('api/v1/menus/' + data.id, data.data)
+            return window.axios.put('menus/' + data.id, data.data)
         },
         removeMenu(context, id) {
-            return window.axios.delete('api/v1/menus/' + id)
+            return window.axios.delete('menus/' + id)
         },
         sendToFacebook(context, id) {
-            return window.axios.get('api/v1/menu/set-menu/' + id)
+            return window.axios.get('menu/set-menu/' + id)
         },
         removeFromFacebook(context) {
-            return window.axios.get('api/v1/menu/remove-menu')
+            return window.axios.get('menu/remove-menu')
         },
         
     }

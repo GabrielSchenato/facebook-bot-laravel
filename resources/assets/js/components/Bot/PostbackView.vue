@@ -19,7 +19,7 @@
             <a @click.prevent="remove()" href="" class="btn red waves-effect waves-light">Remover</a>
         </p>
 
-        <message v-for="message in postback.messages" :message-data="message"></message>
+        <message v-for="message in postback.messages" :message-data="message" v-bind:key="message.id"></message>
 
     <div class="card light-green">
         <div class="card-content">

@@ -4,7 +4,7 @@
         <h3>Meus produtos</h3>
 
         <div v-if="products.data.length > 0">
-            <div class="card horizontal" v-for="product in products.data">
+            <div class="card horizontal" v-for="product in products.data" v-bind:key="product.id">
                 <div class="card-image">
                     <img :src="product.image_full_url">
                 </div>

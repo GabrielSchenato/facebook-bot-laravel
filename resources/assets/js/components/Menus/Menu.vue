@@ -7,7 +7,8 @@
             <router-link
                 v-for="menu in menus.data"
                 class="col s12  waves-effect waves-light btn-large light-green margin-botton"
-                :to="{path: 'menu/' + menu.id}">
+                :to="{path: 'menu/' + menu.id}"
+                v-bind:key="menu.id">
                 {{ menu.locale }} <small>Campo de mensagem: {{ menu.composer_input_disabled ? 'ativado' : 'desativado' }}</small>
             </router-link>
         </div>

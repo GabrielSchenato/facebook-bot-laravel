@@ -7,60 +7,57 @@
                     <form @submit.prevent="login()">
                         <div class="input-field">
                             <label for="email">E-Mail</label>
-                            <input id="email" type="email" name="email" required="" autofocus="" v-model="credentials.email">
+                            <input id="email" type="email" name="email" required autofocus v-model="credentials.email">
                         </div>
 
                         <div class="input-field">
                             <label for="password">Senha</label>
-                            <input id="password" type="password" name="password" required="" v-model="credentials.password">
+                            <input id="password" type="password" name="password" required v-model="credentials.password">
                         </div>
 
-                        <div>                            
+                        <div>
                             <input id="remember" type="checkbox" name="remember" v-model="credentials.remember">
                             <label for="remember">Lembrar de mim</label>
                         </div>
 
                         <hr>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Login
                             <i class="material-icons right">exit_to_app</i>
                         </button>
-                        
-                        <a href="#/register" class="btn green waves-effect waves-light">Cadastre-se <i class="material-icons right">person_add</i></a>
-                    </form>                    
+
+                        <a href="#/register" class="btn green waves-effect waves-light">
+                            Cadastre-se
+                            <i class="material-icons right">person_add</i>
+                        </a>
+                    </form>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import swal from 'sweetalert'
+    import swal from "sweetalert";
     export default {
-        data: function() {
+        data: function () {
             return {
-                credentials: {
-
-                }
-            }
+                credentials: {}
+            };
         },
         methods: {
             login() {
-                window.axios.post('/login', this.credentials)
-                    .then((res) => {
-                        if (res.data.status === 'success') {
-                            swal('Autenticado com sucesso', 'Redirecionando para o painel', 'success', {timer: 1000})
-                            this.$router.push({
-                                path: '/'
-                            })
-
-                        } else {
-                            swal('Falha ao autenticar!', 'Usuário ou senha inválidos', 'error')
-                        }
-                    })
-                    .catch(() => {
-                        swal('Falha ao autenticar!', 'Usuário ou senha inválidos', 'error')
-                    })
+                this.$auth.login({
+                    params: this.credentials,
+                    success: function () { },
+                    error: function () {
+                        swal("Falha ao autenticar!", "Usuário ou senha inválidos", "error");
+                    },
+                    rememberMe: true,
+                    redirect: "/",
+                    fetchUser: true
+                });
             }
         }
-    }
+    };
 </script>
