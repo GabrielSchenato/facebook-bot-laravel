@@ -2837,7 +2837,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         login: function login() {
             this.$auth.login({
-                params: this.credentials,
+                data: this.credentials,
                 success: function success() {},
                 error: function error() {
                     __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()("Falha ao autenticar!", "Usuário ou senha inválidos", "error");
@@ -2955,7 +2955,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 						content: ul
 					});
 				},
-				redirect: "/"
+				redirect: "/",
+				autoLogin: true
 			});
 		}
 	}
@@ -3648,21 +3649,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    computed: {
-        user: function user() {
-            return this.$store.state.user.user;
-        }
-    },
-    mounted: function mounted() {
-        $('#nav-mobile').sideNav({
-            menuWidth: 300,
-            closeOnClick: true
-        });
-    },
+	computed: {
+		user: function user() {
+			return this.$store.state.user.user;
+		}
+	},
+	mounted: function mounted() {
+		$("#nav-mobile").sideNav({
+			menuWidth: 300,
+			closeOnClick: true
+		});
+	},
 
-    methods: {}
+	methods: {}
 });
 
 /***/ }),
@@ -54406,6 +54437,16 @@ var render = function() {
       _vm._v(" "),
       _vm._m(4),
       _vm._v(" "),
+      _vm.$auth.check(["admin"])
+        ? _c("li", [
+            _c(
+              "a",
+              { staticClass: "waves-effect", attrs: { href: "#/menus" } },
+              [_vm._v("Menus")]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _vm._m(5),
       _vm._v(" "),
       _vm._m(6),
@@ -54413,8 +54454,6 @@ var render = function() {
       _vm._m(7),
       _vm._v(" "),
       _vm._m(8),
-      _vm._v(" "),
-      _vm._m(9),
       _vm._v(" "),
       _vm.$auth.check()
         ? _c("li", [
@@ -54447,7 +54486,7 @@ var staticRenderFns = [
       { staticClass: "brand-logo center", attrs: { href: "#/" } },
       [
         _c("i", { staticClass: "material-icons" }, [_vm._v("chat")]),
-        _vm._v(" ChatBot")
+        _vm._v(" ChatBot\n\t\t\t")
       ]
     )
   },
@@ -54491,16 +54530,6 @@ var staticRenderFns = [
     return _c("li", [
       _c("a", { staticClass: "waves-effect", attrs: { href: "#/" } }, [
         _vm._v("Postbacks")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { staticClass: "waves-effect", attrs: { href: "#/menus" } }, [
-        _vm._v("Menus")
       ])
     ])
   },
@@ -69917,6 +69946,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store(__WE
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_4__websanova_vue_auth___default.a, __WEBPACK_IMPORTED_MODULE_5__auth__["a" /* default */]);
 
+__WEBPACK_IMPORTED_MODULE_6_axios___default.a.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    alert('Código: ' + error.response.status + ' Mensagem: ' + error.response.data.error);
+    return Promise.reject(error.response);
+});
+
 var menu = new Vue({
     el: '#menu',
     components: {
@@ -70872,17 +70908,25 @@ module.exports = Component.exports
 
 
 /* harmony default export */ __webpack_exports__["a"] = ([{ path: '/', component: __WEBPACK_IMPORTED_MODULE_0__components_Bot_Postback___default.a, meta: { auth: true } }, { path: '/login', component: __WEBPACK_IMPORTED_MODULE_2__components_Auth_Login___default.a, meta: { auth: false } }, { path: '/register', component: __WEBPACK_IMPORTED_MODULE_3__components_Auth_Register___default.a, meta: { auth: false } }, {
-    path: '/postback/:id', component: __WEBPACK_IMPORTED_MODULE_1__components_Bot_PostbackView___default.a,
+    path: '/postback/:id',
+    component: __WEBPACK_IMPORTED_MODULE_1__components_Bot_PostbackView___default.a,
+    meta: {
+        auth: true
+    }
+}, { path: '/products', component: __WEBPACK_IMPORTED_MODULE_4__components_Products_ProductsList___default.a, meta: { auth: true } }, { path: '/product/:id/remove', component: __WEBPACK_IMPORTED_MODULE_5__components_Products_ProductRemove___default.a, meta: { auth: true } }, { path: '/product/:id/edit', component: __WEBPACK_IMPORTED_MODULE_6__components_Products_ProductEdit___default.a, meta: { auth: true } }, {
+    path: '/menus',
+    name: 'admin.menus',
+    component: __WEBPACK_IMPORTED_MODULE_7__components_Menus_Menu___default.a,
     meta: {
         auth: {
             roles: ['admin'],
             redirect: {
-                name: 'admin'
+                name: 'admin.menus'
             },
             forbiddenRedirect: '/admin/403'
         }
     }
-}, { path: '/products', component: __WEBPACK_IMPORTED_MODULE_4__components_Products_ProductsList___default.a, meta: { auth: true } }, { path: '/product/:id/remove', component: __WEBPACK_IMPORTED_MODULE_5__components_Products_ProductRemove___default.a, meta: { auth: true } }, { path: '/product/:id/edit', component: __WEBPACK_IMPORTED_MODULE_6__components_Products_ProductEdit___default.a, meta: { auth: true } }, { path: '/menus', component: __WEBPACK_IMPORTED_MODULE_7__components_Menus_Menu___default.a, meta: { auth: true } }, { path: '/menu/:id', component: __WEBPACK_IMPORTED_MODULE_8__components_Menus_MenuView___default.a, meta: { auth: true } }, { path: '/suggestions', component: __WEBPACK_IMPORTED_MODULE_9__components_Suggestions_SuggestionsList___default.a, meta: { auth: true } }, { path: '*', component: __WEBPACK_IMPORTED_MODULE_10__components_NotFoundPage___default.a, meta: { auth: undefined } }]);
+}, { path: '/menu/:id', component: __WEBPACK_IMPORTED_MODULE_8__components_Menus_MenuView___default.a, meta: { auth: true } }, { path: '/suggestions', component: __WEBPACK_IMPORTED_MODULE_9__components_Suggestions_SuggestionsList___default.a, meta: { auth: true } }, { path: '*', component: __WEBPACK_IMPORTED_MODULE_10__components_NotFoundPage___default.a, meta: { auth: undefined } }]);
 
 /***/ }),
 

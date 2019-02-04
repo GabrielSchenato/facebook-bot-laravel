@@ -29,6 +29,13 @@ const store = new Vuex.Store(VuexStore);
 
 Vue.use(VueAuth, auth);
 
+axios.interceptors.response.use((response) => {
+    return response;
+}, function (error) {
+    alert('Código: ' + error.response.status + ' Mensagem: ' + error.response.data.error)
+    return Promise.reject(error.response);
+});
+
 const menu = new Vue({
     el: '#menu',
     components: {

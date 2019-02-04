@@ -107,7 +107,8 @@
 							content: ul
 						});
 					},
-					redirect: "/"
+                    redirect: "/",
+                    autoLogin: true,
 				});
 			}
 		}

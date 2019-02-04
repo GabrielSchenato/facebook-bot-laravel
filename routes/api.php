@@ -28,15 +28,15 @@ Route::group(['middleware' => 'jwt.refresh'], function() {
 Route::middleware('jwt.auth')
         ->namespace('Api\V1')
         ->group(function () {
-            Route::resource('/menus', 'MenusController');
+            Route::resource('/menus', 'MenusController')->middleware('isAdmin');
             Route::get('/menu/set-menu/{menu_id}', 'MenusController@setMenu');
             Route::get('/menu/remove-menu', 'MenusController@removeMenu');
 
             Route::resource('/menu-buttons', 'MenuButtonsController');
 
             Route::post('/postbacks/get-started-button/{id}', 'PostbacksController@setGetStartedButton');
-            Route::delete('/postbacks/get-started-button', 'PostbacksController@removeGetStartedButton')->middleware('isAdminOrSelf');
-            Route::resource('/postbacks', 'PostbacksController')->middleware('isAdmin');
+            Route::delete('/postbacks/get-started-button', 'PostbacksController@removeGetStartedButton');
+            Route::resource('/postbacks', 'PostbacksController')->middleware('isAdminOrSelf');
 
             Route::resource('/messages', 'MessagesController');
             Route::post('/messages/{id}/product', 'MessagesController@product');

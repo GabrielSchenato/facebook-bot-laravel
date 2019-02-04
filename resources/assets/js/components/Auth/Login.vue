@@ -48,7 +48,7 @@
         methods: {
             login() {
                 this.$auth.login({
-                    params: this.credentials,
+                    data: this.credentials,
                     success: function () { },
                     error: function () {
                         swal("Falha ao autenticar!", "Usuário ou senha inválidos", "error");
